@@ -1,0 +1,28 @@
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+#container {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	left: 0;
+	right: 0;
+}
+
+.USmap {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	border: 2px transparent;
+	z-index:1;
+	-webkit-filter: 10px;
+  	-moz-filter: 10px;
+  	-o-filter: 10px;
+  	-ms-filter: 10px;
+  	filter: 10px;
+}
