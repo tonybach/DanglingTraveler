@@ -58,9 +58,11 @@
 					animation: google.maps.Animation.DROP,
 					icon: icon
 				});
-				console.log(marker);
+				//console.log(marker);
 				// Set up markers with info windows 
-				google.maps.event.addListener(marker, 'click', function() {
+
+
+				google.maps.event.addListener(marker, 'mouseover', function() {
 					// Close all open infowindows
 					if (infowindow) {
 						infowindow.close();
@@ -69,6 +71,16 @@
 					infowindow = new google.maps.InfoWindow({
 						content: baloon_text
 					});
+					
+					infowindow.open(map,marker);
+				});
+
+				google.maps.event.addListener(marker, 'click', function() {
+					// Close all open infowindows
+					if (infowindow) {
+						infowindow.close();
+					}
+					
 					
 					infowindow.open(map,marker);
 
@@ -84,6 +96,7 @@
 
 					$('.cityMapOptions').css('visibility', 'visible');
 					$('.USmap').css('opacity', '0.3');
+					$('#buttons').css('visibility', 'hidden');
 					$('.USMapPageButtons').css('opacity', '0.3');
 
 				});

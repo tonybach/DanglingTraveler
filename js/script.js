@@ -26,6 +26,7 @@ $(document).ready(function () {
 		$('.cityMap').css('visibility','hidden');
 		$('.cityMapOptions').css('visibility','hidden');
 		$('.USmap').css('opacity', '1');
+		$('#buttons').css('visibility', 'visible');
 		$('.USMapPageButtons').css('opacity', '1');
 	});
 
