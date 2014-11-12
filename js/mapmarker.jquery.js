@@ -58,7 +58,7 @@
 					animation: google.maps.Animation.DROP,
 					icon: icon
 				});
-				
+				console.log(marker);
 				// Set up markers with info windows 
 				google.maps.event.addListener(marker, 'click', function() {
 					// Close all open infowindows
@@ -71,6 +71,21 @@
 					});
 					
 					infowindow.open(map,marker);
+
+					if (marker.position.k == "41.8337329") {
+						$('.chicagoMap').css('visibility', 'visible');
+					} 
+					else if (marker.position.k == "37.7577") {
+						$('.sanFranciscoMap').css('visibility', 'visible');
+					}
+					else if (marker.position.k == "29.817178") {
+						$('.houstonMap').css('visibility', 'visible');
+					}
+
+					$('.cityMapOptions').css('visibility', 'visible');
+					$('.USmap').css('opacity', '0.3');
+					$('.USMapPageButtons').css('opacity', '0.3');
+
 				});
 			}
 		});

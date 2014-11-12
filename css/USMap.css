@@ -26,3 +26,74 @@ html, body {
   	-ms-filter: 10px;
   	filter: 10px;
 }
+
+.cityMap {
+	position: absolute;
+	right: 0;
+	width: 80%;
+	height: 100%;
+	border: 1px solid grey;
+	z-index:2;
+	/*display: none;*/
+	visibility: hidden;
+	margin-top: -34px;
+}
+
+.cityMapOptions {
+	position: absolute;
+	left: 0;
+	width: 20%;
+	height: 100%;
+	/*display: none;*/
+	visibility: hidden;
+	margin-top: -34px;
+}
+
+.dropdown {
+	z-index:3;
+	text-align: center;
+}
+
+.options {
+	width: 75%;
+	height: 40px;
+	line-height: 40px;
+	background-color: rgb(191,191,191);
+	font-size: 1.5em;
+	text-align: left;
+	margin: 0 auto;
+	border-radius: 5px;
+}
+
+.options img {
+	margin-right: 10px;
+	float: right;
+}
+
+#restaurants {
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+
+.attractionsToggle {
+	margin-top: 115px;
+}
+
+.backToUSMap {
+	position: fixed;
+	margin-top: 480px;
+	margin-left: -70px;
+	/*left: 70px;*/
+}
+
+
+ul.dropdown-menu {
+	margin-left: 34px;
+	width: 75%;
+	/*margin: 0 auto;*/
+}
+ul.dropdown-menu li {
+	font-size: 1.3em;
+}
+
+
