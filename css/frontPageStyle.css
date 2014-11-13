@@ -31,6 +31,6 @@ input {
 }
 
 body {
-	background: url(roadtrip.jpg) no-repeat;
+	background: url(../img/roadtrip.jpg) no-repeat;
 	background-size: 100%;
 }

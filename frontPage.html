@@ -3,31 +3,29 @@
 <html>
 	<head>
 		<title>Dangling Traveler - Design Your Trip!</title>
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="css/frontPageStyle.css">
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js">
 		</script>
 		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 		<meta charset="UTF-8">
 	</head>
+
 	<body>
 		<form id="travelform">
 			<input id="from" type="text" value="From">
 			<input id="to" 	 type="text" value="To">
-			<input id="date" type="date">
-			<button id="goButton" type="submit" class="btn btn-default">Let's Go!</button>
+			<input id="date" type="date" value="Date">
+			<input id="goButton" type="button" class="btn btn-default" onclick="showText()">Let's Go!</input>
 		</form>
-	
+
 	<p><tt id = "results"></tt></p>
 
 	<script>
-		function showValues() {
-			var str = $("form").serialize();
-			$("#results").text(str);
+		function showText() {
+			var rawData = "Input data: " + document.getElementById("from").value
+			+ document.getElementById("to").value + document.getElementById("date").value;
+			alert(rawData);
 		}
-		$("input[type='checkbox'], input[type='radio']").on("click", showValues);
-		$("select").on("change", showValues);
-		showValues();
 	</script>
-
 	</body>
 </html>
