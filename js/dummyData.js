@@ -30,33 +30,65 @@ $(document).ready(function(){
 	markers : chicagoMarkers
 	});
 
-	var sanFranciscoMarkers = {"markers": [
+	var sanFranciscoAsianMarkers = {"markers": [
 	{"latitude": "37.764242", "longitude":"-122.430558", "icon": "img/blue_pin_2.png", "baloon_text": "Ike's Place"},
 	{"latitude": "37.805883", "longitude":"-122.420621", "icon": "img/orange_pin_2.png", "baloon_text": 'Gary Danko'},
 	{"latitude": "37.801596", "longitude":"-122.411803", "icon": "img/blue_pin_2.png", "baloon_text": 'The Italian Homemade Company'}
 	]
 	};
+
+	var sanFranciscoAmericanMarkers = {"markers": [
+	{"latitude": "37.798462", "longitude":"-122.407021", "icon": "img/blue_pin_2.png", "baloon_text": "The House"},
+	{"latitude": "37.8074", "longitude":"-122.417155", "icon": "img/orange_pin_2.png", "baloon_text": 'The Codmother Fish and Chips'},
+	{"latitude": "37.781812", "longitude":"-122.409526", "icon": "img/blue_pin_2.png", "baloon_text": 'City Smoke House'}
+	]
+	};
 	 
 	//set up map options
-	$(".sanFranciscoMap").mapmarker({
+	var sanFranciscoMarker = $(".sanFranciscoMap").mapmarker({
 	zoom : 12,
 	center : 'San Francisco',
-	markers : sanFranciscoMarkers
+	markers : sanFranciscoAsianMarkers
 	});
 
-	var houstonMarkers = {"markers": [
+
+	var houstonAsianMarkers = {"markers": [
 	{"latitude": "29.770945", "longitude":"-95.372128", "icon": "img/blue_pin_2.png", "baloon_text": "Stanton's City Bites"},
 	{"latitude": "29.701264", "longitude":"-95.385689", "icon": "img/orange_pin_2.png", "baloon_text": 'M&M Grill'},
 	{"latitude": "29.738506", "longitude":"-95.408158", "icon": "img/blue_pin_2.png", "baloon_text": 'Tacos Tierra Caliente'}
 	]
 	};
+
+	var houstonAmericanMarkers = {"markers": [
+	{"latitude": "29.719579", "longitude":"-95.416424", "icon": "img/blue_pin_2.png", "baloon_text": "Local Foods"},
+	{"latitude": "29.735135", "longitude":"-95.417672", "icon": "img/orange_pin_2.png", "baloon_text": 'Luna Pizzeria'},
+	{"latitude": "29.732609", "longitude":"-95.36631", "icon": "img/blue_pin_2.png", "baloon_text": 'Doshi House Cafe'}
+	]
+	};	
 	 
 	//set up map options
-	$(".houstonMap").mapmarker({
+	var houstonMarker = $(".houstonMap").mapmarker({
 	zoom : 12,
 	center : 'Houston',
-	markers : houstonMarkers
+	markers : houstonAsianMarkers
 	});
+
+	$('.american').click(function(){
+		$(".houstonMap").mapmarker({
+		zoom : 12,
+		center : 'Houston',
+		markers : houstonAmericanMarkers
+		})
+	});
+
+	$('.asian').click(function(){
+		$(".houstonMap").mapmarker({
+		zoom : 12,
+		center : 'Houston',
+		markers : houstonAsianMarkers
+		})
+	})		
+	
 // ]]
 	
 });

@@ -70,19 +70,21 @@ html, body {
 	float: right;
 }
 
-#restaurants {
+.restaurants_button {
 	margin-top: 20px;
 	margin-bottom: 5px;
 }
 
-.attractionsToggle {
-	margin-top: 115px;
+
+.restaurantsToggle {
+	margin-bottom: 180px;
 }
 
 .backToUSMap {
 	position: fixed;
 	margin-top: 480px;
 	margin-left: -70px;
+	/*z-index: 1000;*/
 	/*left: 70px;*/
 }
 
