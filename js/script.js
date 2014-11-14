@@ -1,28 +1,26 @@
 $(document).ready(function () {
-	var restaurants = $("#restaurants");
+	$('.dropdown').on({
+		"shown.bs.dropdown": function() {this.closable = false},
+		"click": function() {this.closable = true},
+		"hide.bs.dropdown": function() {return this.closable}
+	});
+
 	var attractions = $("#attractions");
-	restaurants.click(function() {
-		attractions.toggleClass("attractionsToggle");
+	var restaurants = $("#restaurants");
+
+	$('.restaurants_dropdown').on('shown.bs.dropdown', function() {
+		$('.restaurants_dropdown').addClass("restaurantsToggle");
+	});	
+	$('.restaurants_dropdown').on('hidden.bs.dropdown', function() {
+		$('.restaurants_dropdown').removeClass("restaurantsToggle");
 	})
 
+	$('.dropdown-menu').on('click', function(e) {
+		e.stopPropagation();
+	})
 	
-	// restaurants.focusin(function() {
-	// 	attractions.css("margin-top", "115px");
-	// 	$(".restaurantList").css("display","block");		
-	// });
-
-	// restaurants.focusout(function() {
-	// 	$(".restaurantList").css("display","none");			
-	// 	attractions.css("margin-top", "5px");
-	// });
-	// restaurants.mouseout(function() {
-	// 	$(".dropdown-menu").css("display","none");
-	// 	attractions.css("margin-top", "5px")
-	// });
 	
 	$(".backToUSMap").click(function() {
-		// $('.cityMap').css('display','none');
-		// $('.cityMapOptions').css('display','none');
 		$('.cityMap').css('visibility','hidden');
 		$('.cityMapOptions').css('visibility','hidden');
 		$('.USmap').css('opacity', '1');

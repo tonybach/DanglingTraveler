@@ -27,28 +27,34 @@
 		<div class="houstonMap cityMap"></div>
 
 		<div class ="cityMapOptions">
-			<div class="dropdown">
-			  <button class="dropdown-toggle options" id = "restaurants" type="button" data-toggle="dropdown">
+			<div class="dropdown restaurants_dropdown">
+			  <button class="dropdown-toggle options restaurants_button" type="button" data-toggle="dropdown">
 			    Restaurants
 			    <img src = "img/blue_pin_2.png" alt = "alt" height = "32" width = "20">
 			  </button>
 			   <ul class="dropdown-menu restaurantList" role="menu">
-			      <li><a href="#">Vietnamese</a></li>
-			      <li><a href="#">Chinese</a></li>
-			      <li><a href="#">Thai</a></li>
+			      <li class = "asian"><a href="#">Asian</a></li>
+			      <li class = "american"><a href="#">American</a></li>
+			      <li class = "african"><a href="#">African</a></li>
+			      <li class = "mexican"><a href="#">Mexican</a></li>
+			      <li class = "european"><a href="#">European</a></li>
 			   </ul>
 			</div>
-			<div class="dropdown">
-			  <button class="dropdown-toggle options" id = "attractions" type="button" data-toggle="dropdown">
+
+			<div class="dropdown attractions_dropdown">
+			  <button class="dropdown-toggle options attractions_button" type="button" data-toggle="dropdown">
 			    Attractions
 			    <img src = "img/orange_pin_2.png" alt = "alt" height = "32" width = "20">
 			  </button>
 			   <ul class="dropdown-menu attractionList" role="menu">
-			      <li><a href="#">Parks</a></li>
-			      <li><a href="#">Theaters</a></li>
-			      <li><a href="#">Museums</a></li>
+			      <li class = "theaters"><a href="#">Theaters</a></li>
+			      <li class = "museums"><a href="#">Museums</a></li>
+			      <li class = "parks"><a href="#">Parks</a></li>
+			      <li class = "zoos"><a href="#">Zoos</a></li>
+			      <li class = "landmarks"><a href="#">Landmarks</a></li>
 			   </ul>
 			</div>
+			
 			<div class="dropdown">
 				<button type = "button" class = "backToUSMap btn btn-primary">Back to U.S Map</button>
 			</div>
