@@ -73,8 +73,17 @@
 					});
 					
 					infowindow.open(map,marker);
-					setTimeout(function () { infowindow.close(); }, 5000);
+
 				});
+
+				google.maps.event.addListener(marker, 'mouseout', function() {
+					// Close all open infowindows
+					if (infowindow) {
+						infowindow.close();
+					}
+					
+				});
+
 
 				google.maps.event.addListener(marker, 'click', function() {
 					// Close all open infowindows

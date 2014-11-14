@@ -31,7 +31,7 @@ $(document).ready(function () {
 
 	$(".changeSearch").click(function(){
 		$("#travelform").css("display","block");
-	})
+	});
 
 });
 
