@@ -4,6 +4,8 @@
 	<head>
 		<title>Dangling Traveler - Design Your Trip!</title>
 		<link rel="stylesheet" type="text/css" href="css/frontPageStyle.css">
+		<link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js "></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js">
 		</script>
 		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
@@ -14,24 +16,25 @@
 	<div id="background">
 		<img src="img/roadtrip.jpg" class="stretch" alt="" />
 	</div>
-
 	<body>
+		<div class="container">
 		<form action="USMap.html" id="travelform">
-			<input id="from" type="text" value="From">
-			<input id="to" 	 type="text" value="To">
-			<input id="date" type="date" value="Date">
-			<input id="goButton" type="submit" class="btn btn-default" onclick="showText()" value="Let's go!"></input>
+			<div class="row">
+			<input id="from" placeholder="From" type="text" class="input input-sm" style="width:150px" value="">
+			<input id="to" type="text" placeholder="To" class="input input-sm" style="width:150px" value="">
+			<input id="date" type="date" value="Date" class="input input-sm" style="width:150px">
+			<input id="goButton" type="submit" class="btn btn-primary" onclick="showText()" value="Let's go!"></input>
+			</div>
 		</form>
 
-		<p><tt id = "results"></tt></p>
-
 		<script>
-			function showText() {
-				var rawData = "Input data: " + document.getElementById("from").value
-				+ document.getElementById("to").value + document.getElementById("date").value;
-				alert(rawData);
-			}
-		</script>
+		function showText() {
 
+			var rawData = "Input data: " + document.getElementById("from").value
+			+ document.getElementById("to").value + document.getElementById("date").value;
+			alert(rawData);
+		}
+		</script>
+	</container>
 	</body>
 </html>
