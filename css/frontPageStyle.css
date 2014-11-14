@@ -1,16 +1,30 @@
 #travelform {
+  display: inline-block;
+  width: 300px;
+  /*position: fixed;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: auto;
-	margin-bottom: auto;
+	margin-bottom: auto;*/
+  margin: 0 auto;
 }
 
-input {
+/*input {
+>>>>>>> 7b1b96ddf8a66c20198ea028d2fcbd80a13c8dc4
 	display: inline-block;
 	float: left;
 	margin-top: 250px;
 	margin-right: 15px;
+<<<<<<< HEAD
 }
+=======
+}*/
+
+/*form {
+  display: inline-block;
+  text-align: center;
+}*/
+>>>>>>> 7b1b96ddf8a66c20198ea028d2fcbd80a13c8dc4
 
 #goButton {
 	margin-top: 250px;
@@ -30,7 +44,22 @@ input {
   	-webkit-font-smoothing: antialiased;
 }
 
+<<<<<<< HEAD
 body {
 	background: url(../img/roadtrip.jpg) no-repeat;
 	background-size: 100%;
+=======
+#background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  z-index: -1; /* Ensure div tag stays behind content */
+}
+
+.stretch {
+  width: 100%;
+  height: 100%;
+>>>>>>> 7b1b96ddf8a66c20198ea028d2fcbd80a13c8dc4
 }
