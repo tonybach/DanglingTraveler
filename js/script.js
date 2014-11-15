@@ -9,16 +9,17 @@ $(document).ready(function () {
 	var restaurants = $("#restaurants");
 
 	$('.restaurants_dropdown').on('shown.bs.dropdown', function() {
-		$('.restaurants_dropdown').addClass("restaurantsToggle");
+		// $('.restaurants_dropdown').addClass("restaurantsToggle");
+		$('.attractions_dropdown').addClass("attractionsToggle");
 	});	
 	$('.restaurants_dropdown').on('hidden.bs.dropdown', function() {
-		$('.restaurants_dropdown').removeClass("restaurantsToggle");
+		// $('.restaurants_dropdown').removeClass("restaurantsToggle");
+		$('.attractions_dropdown').removeClass("attractionsToggle");
 	})
 
 	$('.dropdown-menu').on('click', function(e) {
 		e.stopPropagation();
-	})
-	
+	})	
 	
 	$(".backToUSMap").click(function() {
 		$('.cityMap').css('visibility','hidden');

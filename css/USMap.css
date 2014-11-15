@@ -35,9 +35,7 @@ html, body {
 	height: 100%;
 	border: 1px solid grey;
 	z-index:2;
-	/*display: none;*/
 	visibility: hidden;
-	
 }
 
 .cityMapOptions {
@@ -45,9 +43,7 @@ html, body {
 	left: 0;
 	width: 20%;
 	height: 100%;
-	/*display: none;*/
 	visibility: hidden;
-	
 }
 
 .dropdown {
@@ -77,25 +73,28 @@ html, body {
 }
 
 
-.restaurantsToggle {
+/*.restaurantsToggle {
 	margin-bottom: 180px;
+}*/
+
+.attractionsToggle {
+	margin-top: 180px;
 }
 
 .backToUSMap {
 	position: fixed;
-	margin-top: 480px;
-	margin-left: -70px;
+	bottom: 40px;
+	left: 73px;
 	/*z-index: 1000;*/
 	/*left: 70px;*/
 }
 
-#buttons{
+#buttons {
 	position: absolute;
 	top: 10px;
 	left: 5.3%;
 	z-index: 3;
 	padding: 5px;
-
 }
 
 
