@@ -27,6 +27,11 @@ $(document).ready(function () {
 		$('.USmap').css('opacity', '1');
 		$('#buttons').css('visibility', 'visible');
 		$('.USMapPageButtons').css('opacity', '1');
+
+	});
+
+	$(".changeSearch").click(function(){
+		$("#travelform").css("display","block");
 	});
 
 });
