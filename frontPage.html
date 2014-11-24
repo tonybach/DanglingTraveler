@@ -11,10 +11,9 @@
 		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
 		<meta charset="UTF-8">
 	</head>
-
 	
 	<div id="background">
-		<img src="img/roadtrip.jpg" class="stretch" alt="" />
+		<img src="img/Urban_Background.jpg" class="stretch" alt="" />
 	</div>
 	<body>
 		<div class="container">
@@ -26,10 +25,8 @@
 			<input id="goButton" type="submit" class="btn btn-primary" onclick="showText()" value="Let's go!"></input>
 			</div>
 		</form>
-
 		<script>
 		function showText() {
-
 			var rawData = "Input data: " + document.getElementById("from").value
 			+ document.getElementById("to").value + document.getElementById("date").value;
 			alert(rawData);
