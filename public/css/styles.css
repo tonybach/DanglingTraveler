@@ -3,10 +3,12 @@ html, body {
 	margin: 0;
 }
 
+/*-------------------------*/
+/*Front Page*/
+
 #travelform {
   text-align: center;
-  margin-top: 45%;
-  
+  margin-top: 42%; 
 }
 
 /*input {
@@ -34,9 +36,10 @@ html, body {
 .stretch {
   width: 100%;
   height: 100%;
-
 }
 
+/*-------------------------*/
+/*US Map Page*/
 
 
 #container {
@@ -62,6 +65,42 @@ html, body {
   	-ms-filter: 10px;
   	filter: 10px;
 }
+
+#buttons {
+	position: absolute;
+	top: 10px;
+	left: 5.3%;
+	z-index: 3;
+	padding: 5px;
+}
+
+#popup {
+	width: 100%;
+	height: 100%;
+}
+
+#popup_background {
+	width: 100%;
+  	height: 100%;
+  	position: fixed;
+  	left: 25%;
+  	top: 20%;
+  	z-index: -1; 
+}
+
+#popup_travelform {
+  	text-align: center;
+  	margin-top: 15%; 
+}
+
+#hideChangeSearch {
+	text-align: center;
+	margin-top: 5%;
+	margin-left: 46.7%;
+}
+
+/*-------------------------*/
+/*City Map Page*/
 
 .cityMap {
 	position: absolute;
@@ -108,10 +147,6 @@ html, body {
 }
 
 
-/*.restaurantsToggle {
-	margin-bottom: 180px;
-}*/
-
 .attractionsToggle {
 	margin-top: 180px;
 }
@@ -122,14 +157,6 @@ html, body {
 	left: 73px;
 	/*z-index: 1000;*/
 	/*left: 70px;*/
-}
-
-#buttons {
-	position: absolute;
-	top: 10px;
-	left: 5.3%;
-	z-index: 3;
-	padding: 5px;
 }
 
 

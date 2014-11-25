@@ -107,6 +107,7 @@
 					$('.cityMapOptions').css('visibility', 'visible');
 					$('.USmap').css('opacity', '0.3');
 					$('#buttons').css('visibility', 'hidden');
+					$('#popup').css('visibility','hidden');
 					// $('.USMapPageButtons').css('opacity', '0.3');
 					// $('.dropdown-toggle').click();
 					// $('.dropdown').addClass('open')

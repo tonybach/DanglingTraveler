@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
 	$('.dropdown').on({
 		"shown.bs.dropdown": function() {this.closable = false},
 		"click": function() {this.closable = true},
@@ -9,11 +10,9 @@ $(document).ready(function () {
 	var restaurants = $("#restaurants");
 
 	$('.restaurants_dropdown').on('shown.bs.dropdown', function() {
-		// $('.restaurants_dropdown').addClass("restaurantsToggle");
 		$('.attractions_dropdown').addClass("attractionsToggle");
 	});	
 	$('.restaurants_dropdown').on('hidden.bs.dropdown', function() {
-		// $('.restaurants_dropdown').removeClass("restaurantsToggle");
 		$('.attractions_dropdown').removeClass("attractionsToggle");
 	})
 
@@ -27,12 +26,7 @@ $(document).ready(function () {
 		$('.USmap').css('opacity', '1');
 		$('#buttons').css('visibility', 'visible');
 		$('.USMapPageButtons').css('opacity', '1');
-
+		$('#popup').css('visibility','visible');
 	});
-
-	$(".changeSearch").click(function(){
-		$("#travelform").css("display","block");
-	});
-
 });
 

@@ -9,6 +9,7 @@
   "dependencies": {
     "body-parser": "^1.9.3",
     "express": "^4.10.2",
+    "magnific-popup": "^0.9.9",
     "morgan": "^1.5.0",
     "path": "^0.4.9"
   }
