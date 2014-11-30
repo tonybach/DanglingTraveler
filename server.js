@@ -4,8 +4,6 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoskin = require('mongoskin');
 var db = mongoskin.db('mongodb://@localhost:27017/travellerApp', {safe: true});
-var collections = { images: db.collection('images')};
-
 
 var yelp = require("yelp").createClient({
   consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
@@ -29,15 +27,6 @@ var server = app.listen(8080, function() {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(function(req, res, next) {
-  if (!collections.images) {
-    return next(new Error('No Collections.'));
-  }
-  
-  req.collections = collections;
-  next();
-})
 
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + "/frontPage.html");
