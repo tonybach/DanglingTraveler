@@ -38,17 +38,6 @@ app.use(function(req, res, next) {
   req.collections = collections;
   next();
 })
-/*
-// Handle the put http verb for when we want to save
-app.put('/save', function(req, res) {
-  var drawingData = req.body.image;
-  req.collections.images.insert(drawingData, function(error, response){
-    if (error) throw error;
-    res.send(response);
-  })
-})
-
-*/
 
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + "/frontPage.html");
