@@ -2,11 +2,23 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var mongoskin = require('mongoskin');
+var db = mongoskin.db('mongodb://@localhost:27017/travellerApp', {safe: true});
+var collections = { images: db.collection('images')};
+
+
+var yelp = require("yelp").createClient({
+  consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
+  consumer_secret: "U9v66_KMksTohoW9Q-mjEjwTsjU",
+  token: "AtiHRZtIAntMsYeHXCf4R4_onXHllXGt",
+  token_secret: "DtvBltjVHnWPyFXRw2WJYw3ff0o"
+});
 
 var app = express();
 
 app.use(logger('dev'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 var server = app.listen(8080, function() {
 	var host = server.address().address;
@@ -17,6 +29,27 @@ var server = app.listen(8080, function() {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+app.use(function(req, res, next) {
+  if (!collections.images) {
+    return next(new Error('No Collections.'));
+  }
+  
+  req.collections = collections;
+  next();
+})
+/*
+// Handle the put http verb for when we want to save
+app.put('/save', function(req, res) {
+  var drawingData = req.body.image;
+  req.collections.images.insert(drawingData, function(error, response){
+    if (error) throw error;
+    res.send(response);
+  })
+})
+
+*/
+
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + "/frontPage.html");
 })
@@ -24,3 +57,10 @@ app.get('/', function(req, res) {
 app.post('/USMap.html', function(req, res) {
 	res.sendfile(__dirname + "/USMap.html");
 })
+
+
+// See http://www.yelp.com/developers/documentation/v2/search_api
+yelp.search({term: "asian food", location: "San Francisco",sort: 2}, function(error, data) {
+  console.log(error);
+  console.log(data);
+});
