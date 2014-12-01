@@ -16,21 +16,6 @@
 	<title>The Dangling Traveler</title>
 </head>
 <body>
-	<script>
-		$(document).ready(function() {
-			$('.ChangeSearch').magnificPopup({
-				type: 'inline',
-				items: {src: '#popup'},
-				preloader: false,
-				modal: false
-			});
-
-			$('#hideChangeSearch').on('click', function(e) {
-            	e.preventDefault();
-            	$.magnificPopup.close();
-        	});
-		});
-	</script>
 
 	<div id = "container">
 		<div id="buttons">
@@ -90,16 +75,38 @@
 					</div>
 				</form>
 				<button class="btn btn-primary" id="hideChangeSearch">Back</button>
-				<script>
-				function showText() {
-					var rawData = "Input data: " + document.getElementById("from").value
-					+ document.getElementById("to").value + document.getElementById("date").value;
-					alert(rawData);
-				}
-				</script>
 			</div>
 		</div>
 	</div>
 
+	<script>
+		$(document).ready(function() {
+			$('.ChangeSearch').magnificPopup({
+				type: 'inline',
+				items: {src: '#popup'},
+				preloader: false,
+				modal: false
+			});
+
+			$('#hideChangeSearch').on('click', function(e) {
+            	e.preventDefault();
+            	$.magnificPopup.close();
+        	});
+
+    		// <![CDATA[
+			var USMarkers = {"markers": [
+				{"name": "Las Vegas", "icon": "img/orange_pin_2.png", "baloon_text": ""},
+				{"name": "Boston", "icon": "img/orange_pin_2.png", "baloon_text":""},
+				{"name": "Nashville", "icon": "img/orange_pin_2.png", "baloon_text": ""}
+			]};
+
+			$(".USmap").mapmarker({
+			zoom : 4,
+			center : 'United States',
+			markers : USMarkers
+			});
+			//]]
+	});
+	</script>
 </body>
 </html>

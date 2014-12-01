@@ -46,75 +46,74 @@
 		
 		//run the marker JSON loop here
 		$.each(markers.markers, function(i, the_marker){
-			latitude=the_marker.latitude;
-			longitude=the_marker.longitude;
+			name=the_marker.name;
 			icon=the_marker.icon;
 			var baloon_text=the_marker.baloon_text;
 			
-			if(latitude!="" && longitude!=""){
-				var marker = new google.maps.Marker({
-					map: map, 
-					position: new google.maps.LatLng(latitude,longitude),
-					animation: google.maps.Animation.DROP,
-					icon: icon
-				});
+			geocoder.geocode({'address': name}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					var marker = new google.maps.Marker({
+						map: map, 
+						position: results[0].geometry.location,
+						animation: google.maps.Animation.DROP,
+						icon: icon
+					});
+
+					google.maps.event.addListener(marker, 'mouseover', function() {
+							// Close all open infowindows
+						if (infowindow) {
+							infowindow.close();
+						}
+						
+						infowindow = new google.maps.InfoWindow({
+							content: baloon_text
+						});
+						
+						infowindow.open(map,marker);
+
+					});
+
+					google.maps.event.addListener(marker, 'mouseout', function() {
+						// Close all open infowindows
+						if (infowindow) {
+							infowindow.close();
+						}
+						
+					});
+
+					google.maps.event.addListener(marker, 'click', function() {
+						// Close all open infowindows
+						if (infowindow) {
+							infowindow.close();
+						}
+						
+						infowindow.open(map,marker);
+
+						if (marker.position.k == "41.8337329") {
+							$('.chicagoMap').css('visibility', 'visible');
+						} 
+						else if (marker.position.k == "37.7577") {
+							$('.sanFranciscoMap').css('visibility', 'visible');
+						}
+						else if (marker.position.k == "29.817178") {
+							$('.houstonMap').css('visibility', 'visible');
+						}
+
+						$('.cityMapOptions').css('visibility', 'visible');
+						$('.USmap').css('opacity', '0.3');
+						$('#buttons').css('visibility', 'hidden');
+						$('#popup').css('visibility','hidden');
+					});
+				} 
+				else {
+					alert("Geocode was not successful for the following reason " + status);
+				}
+			});
 				//console.log(marker);
 				// Set up markers with info windows 
 
 
-				google.maps.event.addListener(marker, 'mouseover', function() {
-					// Close all open infowindows
-					if (infowindow) {
-						infowindow.close();
-					}
-					
-					infowindow = new google.maps.InfoWindow({
-						content: baloon_text
-					});
-					
-					infowindow.open(map,marker);
-
-				});
-
-				google.maps.event.addListener(marker, 'mouseout', function() {
-					// Close all open infowindows
-					if (infowindow) {
-						infowindow.close();
-					}
-					
-				});
-
-
-				google.maps.event.addListener(marker, 'click', function() {
-					// Close all open infowindows
-					if (infowindow) {
-						infowindow.close();
-					}
-					
-					
-					infowindow.open(map,marker);
-
-					if (marker.position.k == "41.8337329") {
-						$('.chicagoMap').css('visibility', 'visible');
-					} 
-					else if (marker.position.k == "37.7577") {
-						$('.sanFranciscoMap').css('visibility', 'visible');
-					}
-					else if (marker.position.k == "29.817178") {
-						$('.houstonMap').css('visibility', 'visible');
-					}
-
-					$('.cityMapOptions').css('visibility', 'visible');
-					$('.USmap').css('opacity', '0.3');
-					$('#buttons').css('visibility', 'hidden');
-					$('#popup').css('visibility','hidden');
-					// $('.USMapPageButtons').css('opacity', '0.3');
-					// $('.dropdown-toggle').click();
-					// $('.dropdown').addClass('open')
-
-				});
-			}
+	
 		});
 	}
-
 })(jQuery);

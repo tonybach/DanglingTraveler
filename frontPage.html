@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+<!-- change to Jade? -->
 
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Dangling Traveler - Design Your Trip!</title>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 		<link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 		<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.min.js "></script>
-		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js">
-		</script>
-		<script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 		<meta charset="UTF-8">
 	</head>
 	
@@ -25,13 +24,14 @@
 			<input id="goButton" type="submit" class="btn btn-primary" onclick="showText()" value="Let's go!"></input>
 			</div>
 		</form>
-		<script>
-		function showText() {
-			var rawData = "Input data: " + document.getElementById("from").value
-			+ document.getElementById("to").value + document.getElementById("date").value;
-			alert(rawData);
-		}
-		</script>
 		</div>
+
+		<script>
+			function showText() {
+				var rawData = "Input data: " + document.getElementById("from").value
+				+ document.getElementById("to").value + document.getElementById("date").value;
+				alert(rawData);
+			}
+		</script>
 	</body>
 </html>

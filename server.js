@@ -29,11 +29,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', function(req, res) {
-	res.sendfile(__dirname + "/frontPage.html");
+	res.sendFile(__dirname + "/frontPage.html");
 })
 
 app.post('/USMap.html', function(req, res) {
-	res.sendfile(__dirname + "/USMap.html");
+	// var destination = req.body
+	res.sendFile(__dirname + "/USMap.html");
 })
 
 
