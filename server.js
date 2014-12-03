@@ -15,6 +15,11 @@ var yelp = require("yelp").createClient({
 
 var app = express();
 
+var restaurantArray = [];
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -39,26 +44,22 @@ app.use(function(req, res, next) {
 
 
 app.get('/', function(req, res) {
-	res.sendFile(__dirname + "/frontPage.html");
+	res.render('frontPage');
 })
 
-app.post('/USMap.html', function(req, res) {
-	var destination=req.body.to;
-	console.log(destination);
-	//var restaurantType=req.body.restaurantList;
-	//console.log(restaurantType);
 
-	// See http://www.yelp.com/developers/documentation/v2/search_api
-	yelp.search({term: "asian restaurant", location: destination ,sort: 2}, function(error, data) {
-	console.log(error);
-	//console.log(data);
-	req.collections.yelpData.insert(data, function(error, response){
+app.post('/USMap', function(req, res) {
+	var destination = req.body.destination;
+	res.render('USMap', {destination: destination});
+	var departure = req.body.departure;
+	res.render('USMap', {departure: departure});
+	yelp.search({term: "asian", location: destination, sort: 2}, function(error, data) {
+  		console.log(error);
+  		console.log(data.businesses[0]);
+  		restaurantArray = data.businesses;
+  		req.collections.yelpData.insert(restaurantArray, function(error, response){
 		if (error) throw error;
-
 	})
+  		
 	});
-	res.sendFile(__dirname + "/USMap.html");
 })
-
-
-

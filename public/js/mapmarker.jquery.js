@@ -89,16 +89,7 @@
 						
 						infowindow.open(map,marker);
 
-						if (marker.position.k == "41.8337329") {
-							$('.chicagoMap').css('visibility', 'visible');
-						} 
-						else if (marker.position.k == "37.7577") {
-							$('.sanFranciscoMap').css('visibility', 'visible');
-						}
-						else if (marker.position.k == "29.817178") {
-							$('.houstonMap').css('visibility', 'visible');
-						}
-
+						$('cityMap').css('visibility','visible');
 						$('.cityMapOptions').css('visibility', 'visible');
 						$('.USmap').css('opacity', '0.3');
 						$('#buttons').css('visibility', 'hidden');
@@ -111,9 +102,6 @@
 			});
 				//console.log(marker);
 				// Set up markers with info windows 
-
-
-	
 		});
 	}
 })(jQuery);

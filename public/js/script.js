@@ -1,5 +1,8 @@
 $(document).ready(function () {
 
+// -------------------------------------
+// RESTAURANT & ATTRACTION DROPDOWNS
+// -------------------------------------
 	$('.dropdown').on({
 		"shown.bs.dropdown": function() {this.closable = false},
 		"click": function() {this.closable = true},
@@ -18,8 +21,11 @@ $(document).ready(function () {
 
 	$('.dropdown-menu').on('click', function(e) {
 		e.stopPropagation();
-	})	
-	
+	})
+
+// -------------------------------------
+// BACK TO US MAP BUTTON
+// -------------------------------------
 	$(".backToUSMap").click(function() {
 		$('.cityMap').css('visibility','hidden');
 		$('.cityMapOptions').css('visibility','hidden');
@@ -28,5 +34,44 @@ $(document).ready(function () {
 		$('.USMapPageButtons').css('opacity', '1');
 		$('#popup').css('visibility','visible');
 	});
+
+// -------------------------------------
+// CHANGE SEARCH BUTTON
+// -------------------------------------
+	$('.ChangeSearch').magnificPopup({
+		type: 'inline',
+		items: {src: '#popup'},
+		preloader: false,
+		modal: false
+	});
+
+	$('#hideChangeSearch').on('click', function(e) {
+    	e.preventDefault();
+    	$.magnificPopup.close();
+	});
+
+// -------------------------------------
+// MARKER DATA
+// -------------------------------------
+	// // <![CDATA[
+	var USMarkers = {"markers": [
+		{"name": $('.destinationValue').text(), "icon": "img/orange_pin_2.png", "baloon_text": ""},
+		{"name": "Boston", "icon": "img/orange_pin_2.png", "baloon_text":""},
+		{"name": "Nashville", "icon": "img/orange_pin_2.png", "baloon_text": ""}
+	]};
+	$(".USmap").mapmarker({
+	zoom : 4,
+	center : 'United States',
+	markers : USMarkers
+	});
+
+	$(".cityMap").mapmarker({
+	zoom: 10,
+	center: $('.destinationValue').text(),
+	markers: USMarkers
+	});
+	// //]]
 });
+
+
 
