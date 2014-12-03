@@ -4,6 +4,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoskin = require('mongoskin');
 var db = mongoskin.db('mongodb://@localhost:27017/travellerApp', {safe: true});
+var destination;
 
 var yelp = require("yelp").createClient({
   consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
@@ -13,6 +14,11 @@ var yelp = require("yelp").createClient({
 });
 
 var app = express();
+
+var restaurantArray = [];
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -29,17 +35,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.get('/', function(req, res) {
-	res.sendFile(__dirname + "/frontPage.html");
+	res.render('frontPage');
 })
 
-app.post('/USMap.html', function(req, res) {
-	// var destination = req.body
-	res.sendFile(__dirname + "/USMap.html");
+app.post('/USMap', function(req, res) {
+	destination = req.body.destination;
+	res.render('USMap', {destination: destination});
+	yelp.search({term: "asian food", location: destination, sort: 2}, function(error, data) {
+  		console.log(error);
+  		console.log(data.businesses[0]);
+  		restaurantArray = data.businesses;
+	});
 })
+
 
 
 // See http://www.yelp.com/developers/documentation/v2/search_api
-yelp.search({term: "asian food", location: "San Francisco",sort: 2}, function(error, data) {
-  console.log(error);
-  console.log(data);
-});

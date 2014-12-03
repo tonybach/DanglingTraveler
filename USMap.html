@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false "></script>
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/mapmarker.jquery.js"></script>
-	<script type="text/javascript" src="js/dummyData.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<script type="text/javascript" src="js/jquery.magnific-popup.min.js"></script>
 	<title>The Dangling Traveler</title>
@@ -21,8 +21,6 @@
 		<div id="buttons">
 		<button type="submit" class="btn btn-primary ChangeSearch" href="frontPage.html">Change Search</button>
 		<button type="submit" class="btn btn-primary USMapPageButtons">Print Route Summary</button>
-		<!--<a href="frontPage.html" class="btn btn-primary active" role="button">Change Search</a>
-		<a href="#" class="btn btn-primary active" role="button">Print Route Summary</a> -->
 		</div>
 		<div class="USmap"></div>
 		<div class="chicagoMap cityMap"></div>
@@ -78,7 +76,6 @@
 			</div>
 		</div>
 	</div>
-
 	<script>
 		$(document).ready(function() {
 			$('.ChangeSearch').magnificPopup({
@@ -87,19 +84,16 @@
 				preloader: false,
 				modal: false
 			});
-
 			$('#hideChangeSearch').on('click', function(e) {
             	e.preventDefault();
             	$.magnificPopup.close();
         	});
-
     		// <![CDATA[
 			var USMarkers = {"markers": [
 				{"name": "Las Vegas", "icon": "img/orange_pin_2.png", "baloon_text": ""},
 				{"name": "Boston", "icon": "img/orange_pin_2.png", "baloon_text":""},
 				{"name": "Nashville", "icon": "img/orange_pin_2.png", "baloon_text": ""}
 			]};
-
 			$(".USmap").mapmarker({
 			zoom : 4,
 			center : 'United States',

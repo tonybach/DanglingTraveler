@@ -1,0 +1,66 @@
+doctype html(lang='en')
+head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', type='text/css', href='css/styles.css')
+    link(rel='stylesheet', type='text/css', href='css/magnific-popup.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-1.11.0.min.js ')
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?sensor=false ')
+    script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(type='text/javascript', src='js/mapmarker.jquery.js')
+    script(type='text/javascript', src='js/script.js')
+    script(type='text/javascript', src='js/jquery.magnific-popup.min.js')
+    title The Dangling Traveler
+  body
+    #container
+      .destinationValue
+        = destination
+      #buttons
+        button.btn.btn-primary.ChangeSearch(type='submit', href='frontPage.html') Change Search
+        button.btn.btn-primary.USMapPageButtons(type='submit') Print Route Summary
+      .USmap
+      .cityMap
+      .cityMapOptions
+        .dropdown.restaurants_dropdown
+          button.dropdown-toggle.options.restaurants_button(type='button', data-toggle='dropdown')
+            | Restaurants
+            img(src='img/blue_pin_2.png', alt='alt', height='32', width='20')  
+          ul.dropdown-menu.restaurantList(role='menu')
+            li.asian
+              a(href='#') Asian     
+            li.american
+              a(href='#') American
+            li.african
+              a(href='#') African
+            li.mexican
+              a(href='#') Mexican
+            li.european
+              a(href='#') European
+        .dropdown.attractions_dropdown
+          button.dropdown-toggle.options.attractions_button(type='button', data-toggle='dropdown')
+            | Attractions
+            img(src='img/orange_pin_2.png', alt='alt', height='32', width='20')
+          ul.dropdown-menu.attractionList(role='menu')
+            li.theaters
+              a(href='#') Theaters      
+            li.museums
+              a(href='#') Museums       
+            li.parks
+              a(href='#') Parks
+            li.zoos
+              a(href='#') Zoos
+            li.landmarks
+              a(href='#') Landmarks
+        .dropdown
+          button.backToUSMap.btn.btn-primary(type='button') Back to U.S Map
+        #popup
+          #popup_background
+            img(src='img/roadtrip.jpg', alt='')
+          form#popup_travelform(action='USMap', method='POST')
+            .row
+              input#from.input.input-sm(placeholder='From', type='text', style='width:150px', value='')
+              input#to.input.input-sm(type='text', placeholder='To', style='width:150px', value='')
+              input#date.input.input-sm(type='date', value='Date', style='width:150px')
+              input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
+          button#hideChangeSearch.btn.btn-primary Back
