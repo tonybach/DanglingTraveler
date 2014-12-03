@@ -18,8 +18,8 @@
 		<div class="container">
 		<form action="USMap.html" id="travelform" method = "POST">
 			<div class="row">
-			<input id="from" placeholder="From" type="text" class="input input-sm" style="width:150px" value="">
-			<input id="to" type="text" placeholder="To" class="input input-sm" style="width:150px" value="">
+			<input id="from" name="from" placeholder="From" type="text" class="input input-sm" style="width:150px" value="">
+			<input id="to" name="to" type="text" placeholder="To" class="input input-sm" style="width:150px" value="">
 			<input id="date" type="date" value="Date" class="input input-sm" style="width:150px">
 			<input id="goButton" type="submit" class="btn btn-primary" onclick="showText()" value="Let's go!"></input>
 			</div>
@@ -29,8 +29,8 @@
 		<script>
 			function showText() {
 				var rawData = "Input data: " + document.getElementById("from").value
-				+ document.getElementById("to").value + document.getElementById("date").value;
-				alert(rawData);
+				+ " "+document.getElementById("to").value + " "+document.getElementById("date").value;
+				//alert(rawData);
 			}
 		</script>
 	</body>

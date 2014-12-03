@@ -4,6 +4,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoskin = require('mongoskin');
 var db = mongoskin.db('mongodb://@localhost:27017/travellerApp', {safe: true});
+var collections= { yelpData: db.collection('yelpData')};
 
 var yelp = require("yelp").createClient({
   consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
@@ -27,19 +28,37 @@ var server = app.listen(8080, function() {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+	if (!collections.yelpData) {
+		return next(new Error('No Collections.'));
+	}
+	
+	req.collections = collections;
+	next();
+})
+
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + "/frontPage.html");
 })
 
 app.post('/USMap.html', function(req, res) {
-	// var destination = req.body
+	var destination=req.body.to;
+	console.log(destination);
+	//var restaurantType=req.body.restaurantList;
+	//console.log(restaurantType);
+
+	// See http://www.yelp.com/developers/documentation/v2/search_api
+	yelp.search({term: "asian restaurant", location: destination ,sort: 2}, function(error, data) {
+	console.log(error);
+	//console.log(data);
+	req.collections.yelpData.insert(data, function(error, response){
+		if (error) throw error;
+
+	})
+	});
 	res.sendFile(__dirname + "/USMap.html");
 })
 
 
-// See http://www.yelp.com/developers/documentation/v2/search_api
-yelp.search({term: "asian food", location: "San Francisco",sort: 2}, function(error, data) {
-  console.log(error);
-  console.log(data);
-});
+
