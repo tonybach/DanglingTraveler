@@ -3,7 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoskin = require('mongoskin');
-var db = mongoskin.db('mongodb://@localhost:27017/travellerApp', {safe: true});
+var db = mongoskin.db('mongodb://@141.140.178.25:27017/travellerApp', {safe: true});
 var collections= { yelpData: db.collection('yelpData')};
 
 var yelp = require("yelp").createClient({
@@ -55,11 +55,13 @@ app.post('/USMap', function(req, res) {
 	res.render('USMap', {departure: departure});
 	yelp.search({term: "asian", location: destination, sort: 2}, function(error, data) {
   		console.log(error);
-  		console.log(data.businesses[0]);
+  		//console.log(data.businesses[0]);
   		restaurantArray = data.businesses;
-  		req.collections.yelpData.insert(restaurantArray, function(error, response){
-		if (error) throw error;
-	})
+  		console.log(restaurantArray);
+
+  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
+		//if (error) throw error;
+	//})
   		
 	});
 })
