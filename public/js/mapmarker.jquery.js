@@ -89,7 +89,7 @@
 						
 						infowindow.open(map,marker);
 
-						$('cityMap').css('visibility','visible');
+						$('.cityMap').css('visibility','visible');
 						$('.cityMapOptions').css('visibility', 'visible');
 						$('.USmap').css('opacity', '0.3');
 						$('#buttons').css('visibility', 'hidden');

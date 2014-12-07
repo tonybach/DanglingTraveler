@@ -7,24 +7,33 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     script(type='text/javascript', src='http://code.jquery.com/jquery-1.11.0.min.js ')
     script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
     script(type='text/javascript', src='js/jquery.geocomplete.js') 
+    script(type='text/javascript', src='js/script.js') 
     meta(charset='UTF-8')
-  #background
-    img.stretch(src='img/roadtrip.jpg', alt='')
-  body
-    .container
-      form#travelform(action='USMap', method='POST')
-        .row
-          input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:150px', value='')
-          input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
+    #background
+      img.stretch(src='img/roadtrip.jpg', alt='')
+    body
+      .container
+        form#travelform(action='USMap', method='POST')
+          .row
+            input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:150px', value='')
+            input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
 
-        button#addCities.btn.btn-primary
-          |Add Cities
+          input#moreCities.btn.btn-primary(type='button', onclick='add_cities();', value='Add More Cities')
+          #addCities
+            #wrapper.content
 
-    script.
-      $("input").geocomplete(); 
-      function showText() {
-      var rawData = "Input data: " + document.getElementById("from").value
-      + document.getElementById("to").value + document.getElementById("date").value;
-      alert(rawData);
-      }
+
+      script.
+        $("input").geocomplete({
+        componentRestrictions: {country: 'us'}
+        })
+        function showText() {
+        var rawData = "Input data: " + document.getElementById("from").value
+        + document.getElementById("to").value + document.getElementById("date").value;
+        alert(rawData);
+        }
+        function add_cities() {
+          document.getElementById('wrapper').innerHTML += '<span><input type="text"><small></small></span>\r\n';
+        }

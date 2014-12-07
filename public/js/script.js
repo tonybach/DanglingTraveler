@@ -55,9 +55,7 @@ $(document).ready(function () {
 // -------------------------------------
 	// // <![CDATA[
 	var USMarkers = {"markers": [
-		{"name": $('.destinationValue').text(), "icon": "img/orange_pin_2.png", "baloon_text": ""},
-		{"name": "Boston", "icon": "img/orange_pin_2.png", "baloon_text":""},
-		{"name": "Nashville", "icon": "img/orange_pin_2.png", "baloon_text": ""}
+		{"name": $('.destinationValue').text(), "icon": "img/orange_pin_2.png", "baloon_text": ""}
 	]};
 	$(".USmap").mapmarker({
 	zoom : 4,

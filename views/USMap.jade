@@ -6,12 +6,12 @@ head
     link(rel='stylesheet', type='text/css', href='css/magnific-popup.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     script(type='text/javascript', src='http://code.jquery.com/jquery-1.11.0.min.js ')
-    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places ')
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
+    script(type='text/javascript', src='js/jquery.geocomplete.js') 
     script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     script(type='text/javascript', src='js/mapmarker.jquery.js')
     script(type='text/javascript', src='js/script.js')
     script(type='text/javascript', src='js/jquery.magnific-popup.min.js')
-    script(type='text/javascript', src='js/jquery.geocomplete.js') 
     title The Dangling Traveler
   body
     #container
@@ -61,8 +61,23 @@ head
             img(src='img/roadtrip.jpg', alt='')
           form#popup_travelform(action='USMap', method='POST')
             .row
-              input#from.input.input-sm(placeholder='From', type='text', style='width:150px', value='')
-              input#to.input.input-sm(type='text', placeholder='To', style='width:150px', value='')
-              input#date.input.input-sm(type='date', value='Date', style='width:150px')
+              input#DestinationCity.input.input-sm(type='text', placeholder='Destination City', style='width:150px', value='')
               input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
+            input#moreCities.btn.btn-primary(type='button', onclick='add_cities();', value='Add More Cities')
+            #addCities
+              #wrapper.content
           button#hideChangeSearch.btn.btn-primary Back
+
+      script.
+        $("input").geocomplete({
+        componentRestrictions: {country: 'us'}
+        })
+        function showText() {
+        var rawData = "Input data: " + document.getElementById("from").value
+        + document.getElementById("to").value + document.getElementById("date").value;
+        alert(rawData);
+        }
+        function add_cities() {
+          document.getElementById('wrapper').innerHTML += '<span>Next Destination: <input type="text"><small></small></span>\r\n';
+        }
+
