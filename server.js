@@ -50,6 +50,7 @@ app.get('/', function(req, res) {
 
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
+
 	res.render('USMap', {destination: destination});
 	var restaurants=[]
 	yelp.search({location: destination, sort: 2}, function(error, data) {

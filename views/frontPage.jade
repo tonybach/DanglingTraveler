@@ -18,7 +18,7 @@ html
         form#travelform(action='USMap', method='POST')
           .row
             input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:150px', value='')
-            input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
+            input#goButton.btn.btn-primary(type='submit', value="Let's go!")
 
           input#DestinationCity.btn.btn-primary(type='button', onclick='add_cities();', value='Add More Cities')
           #addCities
