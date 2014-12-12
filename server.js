@@ -51,13 +51,17 @@ app.get('/', function(req, res) {
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
 	res.render('USMap', {destination: destination});
-	var departure = req.body.departure;
-	res.render('USMap', {departure: departure});
-	yelp.search({term: "asian", location: destination, sort: 2}, function(error, data) {
+	var restaurants=[]
+	yelp.search({location: destination, sort: 2}, function(error, data) {
   		console.log(error);
   		//console.log(data.businesses[0]);
-  		restaurantArray = data.businesses;
-  		console.log(restaurantArray);
+  		for (var i = 0; i < 5; i++) {
+  			restaurants.push(data.businesses[i].location.display_address.join());
+  		}
+  		//restaurantArray = data.businesses;
+  		//console.log(restaurantArray);
+  		console.log(restaurants);
+		res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
 
   		//req.collections.yelpData.insert(restaurantArray, function(error, response){
 		//if (error) throw error;
