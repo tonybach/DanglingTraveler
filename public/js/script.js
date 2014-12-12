@@ -23,6 +23,10 @@ $(document).ready(function () {
 		e.stopPropagation();
 	})
 
+	$('.dropdown-menu li a').on('click', function() {
+		console.log($(this).text());
+	})
+
 // -------------------------------------
 // BACK TO US MAP BUTTON
 // -------------------------------------
@@ -50,13 +54,23 @@ $(document).ready(function () {
     	$.magnificPopup.close();
 	});
 
+	console.log(destination);
+	console.log(restaurant_list);
+
 // -------------------------------------
 // MARKER DATA
 // -------------------------------------
 	// // <![CDATA[
 	var USMarkers = {"markers": [
-		{"name": $('.destinationValue').text(), "icon": "img/orange_pin_2.png", "baloon_text": ""}
+		{"name": destination, "icon": "img/orange_pin_2.png", "baloon_text": ""}
 	]};
+
+	var cityMarkers = {"markers": []};
+	for (var i = 0; i< restaurant_list.length; i++) {
+		cityMarkers.markers.push({"name": restaurant_list[i], "icon": "img/orange_pin_2.png", "baloon_text": ""})
+	}
+	console.log(cityMarkers);
+
 	$(".USmap").mapmarker({
 	zoom : 4,
 	center : 'United States',
@@ -65,8 +79,8 @@ $(document).ready(function () {
 
 	$(".cityMap").mapmarker({
 	zoom: 10,
-	center: $('.destinationValue').text(),
-	markers: USMarkers
+	center: destination,
+	markers: cityMarkers
 	});
 	// //]]
 });

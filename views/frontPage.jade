@@ -18,7 +18,7 @@ html
         form#travelform(action='USMap', method='POST')
           .row
             input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:150px', value='')
-            input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
+            input#goButton.btn.btn-primary(type='submit', value="Let's go!")
 
           input#moreCities.btn.btn-primary(type='button', onclick='add_cities();', value='Add More Cities')
           #addCities
@@ -29,11 +29,6 @@ html
         $("input").geocomplete({
         componentRestrictions: {country: 'us'}
         })
-        function showText() {
-        var rawData = "Input data: " + document.getElementById("from").value
-        + document.getElementById("to").value + document.getElementById("date").value;
-        alert(rawData);
-        }
         function add_cities() {
           document.getElementById('wrapper').innerHTML += '<span><input type="text"><small></small></span>\r\n';
         }
