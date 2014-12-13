@@ -47,20 +47,43 @@ app.get('/', function(req, res) {
 	res.render('frontPage');
 })
 
+var destination;
+var restaurants;
+
+app.get('/USMap/:city?/:category?', function(req, res) {
+	if (req.params.city && req.params.category) {
+		destination = req.params.city;
+		var category = req.params.category;
+		restaurants = [];
+		yelp.search({term: category, location: destination, sort: 2}, function(error, data) {
+	  		console.log(error);
+	  		for (var i = 0; i < 5; i++) {
+	  			restaurants.push(data.businesses[i].location.display_address.join());
+	  		}
+			console.log(restaurants);
+			res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants)});  		
+		});
+	}
+	else {
+		restaurants = [];
+		yelp.search({term: "", location: destination, sort: 2}, function(error, data) {
+	  		console.log(error);
+	  		for (var i = 0; i < 5; i++) {
+	  			restaurants.push(data.businesses[i].location.display_address.join());
+	  		}
+			res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
+		});
+	}
+})
 
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
-
-	res.render('USMap', {destination: destination});
 	var restaurants=[]
-	yelp.search({location: destination, sort: 2}, function(error, data) {
+	yelp.search({term: "", location: destination, sort: 2}, function(error, data) {
   		console.log(error);
-  		//console.log(data.businesses[0]);
   		for (var i = 0; i < 5; i++) {
   			restaurants.push(data.businesses[i].location.display_address.join());
   		}
-  		//restaurantArray = data.businesses;
-  		//console.log(restaurantArray);
   		console.log(restaurants);
 		res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
 

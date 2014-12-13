@@ -89,11 +89,23 @@
 						
 						infowindow.open(map,marker);
 
-						$('.cityMap').css('visibility','visible');
-						$('.cityMapOptions').css('visibility', 'visible');
-						$('.USmap').css('opacity', '0.3');
-						$('#buttons').css('visibility', 'hidden');
-						$('#popup').css('visibility','hidden');
+						geocoder.geocode({'address': destination}, function(results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								var markerLocation = marker.position;
+								var resultLocation = results[0].geometry.location
+								if (markerLocation.k == resultLocation.k && markerLocation.D == resultLocation.D) {
+									window.location.href = "http://localhost:8080/USMap/" + destination + "/general";
+								}
+							}
+						})
+						// console.log(destination);
+						// console.log(marker);
+						// window.location.href = "http://localhost:8080/USMap/Atlanta";
+						// $('.cityMap').css('visibility','visible');
+						// $('.cityMapOptions').css('visibility', 'visible');
+						// $('.USmap').css('opacity', '0.3');
+						// $('#buttons').css('visibility', 'hidden');
+						// $('#popup').css('visibility','hidden');
 					});
 				} 
 				else {

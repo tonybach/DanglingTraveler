@@ -1,0 +1,61 @@
+doctype html(lang='en')
+html
+head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', type='text/css', href='../../css/styles.css')
+    link(rel='stylesheet', type='text/css', href='../../css/magnific-popup.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    script(type='text/javascript', src='http://code.jquery.com/jquery-1.11.0.min.js ')
+    script(type='text/javascript', src='http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
+    script(type='text/javascript', src='../../js/jquery.geocomplete.js') 
+    script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(type='text/javascript', src='../../js/mapmarker.jquery.js')
+    script.
+      var destination = "!{destination}";
+      var restaurant_list = JSON.parse('!{restaurants}');
+      console.log(restaurant_list);
+    script(type='text/javascript', src='../../js/script.js')
+    script(type='text/javascript', src='../../js/jquery.magnific-popup.min.js')
+    title The Dangling Traveler
+  body
+    #container
+      .cityMap
+      .cityMapOptions
+        .dropdown.restaurants_dropdown
+          button.dropdown-toggle.options.restaurants_button(type='button', data-toggle='dropdown')
+            | Restaurants
+            img(src='../../img/blue_pin_2.png', alt='alt', height='32', width='20')  
+          ul.dropdown-menu.restaurantList(role='menu')
+            li.general_restaurant
+              a(href='http://localhost:8080/USMap/' + destination + '/general') General
+            li.asian
+              a(href='http://localhost:8080/USMap/' + destination + '/asian') Asian     
+            li.american
+              a(href='http://localhost:8080/USMap/' + destination + '/american') American
+            li.african
+              a(href='http://localhost:8080/USMap/' + destination + '/african') African
+            li.mexican
+              a(href='http://localhost:8080/USMap/' + destination + '/mexican') Mexican
+            li.european
+              a(href='http://localhost:8080/USMap/' + destination + '/european') European
+        .dropdown.attractions_dropdown
+          button.dropdown-toggle.options.attractions_button(type='button', data-toggle='dropdown')
+            | Attractions
+            img(src='../../img/orange_pin_2.png', alt='alt', height='32', width='20')
+          ul.dropdown-menu.attractionList(role='menu')
+            li.general_attraction
+              a(href='http://localhost:8080/USMap/' + destination + '/general') General
+            li.theaters
+              a(href='http://localhost:8080/USMap/' + destination + '/theaters') Theaters      
+            li.museums
+              a(href='http://localhost:8080/USMap/' + destination + '/museums') Museums       
+            li.parks
+              a(href='http://localhost:8080/USMap/' + destination + '/parks') Parks
+            li.zoos
+              a(href='http://localhost:8080/USMap/' + destination + '/zoos') Zoos
+            li.landmarks
+              a(href='http://localhost:8080/USMap/' + destination + '/landmarks') Landmarks
+        .dropdown
+          button.backToUSMap.btn.btn-primary(type='submit') Back to U.S Map
+
