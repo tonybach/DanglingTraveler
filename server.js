@@ -87,7 +87,7 @@ app.post('/USMap', function(req, res) {
 	  			restaurants.push(data.businesses[i].location.display_address.join());
 	  		}
 	  		console.log(restaurants);
-			res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
+			
 
 	  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
 			//if (error) throw error;
@@ -96,4 +96,5 @@ app.post('/USMap', function(req, res) {
   		
 	});
 	}
+	res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
 })

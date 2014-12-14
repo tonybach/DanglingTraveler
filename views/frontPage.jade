@@ -13,7 +13,6 @@ html
     meta(charset='UTF-8')
     
     #background
-<<<<<<< Updated upstream
       img.stretch(src='img/Urban_Background.jpg', alt='')
     body
       .container
@@ -37,28 +36,4 @@ html
           }          
         }
         var destinationCity = $('#DestinationCity').val();
-=======
-      img.stretch(src='img/roadtrip.jpg', alt='')
-
-    body
-      .container
-        form#travelform(action='USMap', method='Post')
-          table#DestinationCities
-            tbody
-              tr.city
-                td.row
-                  input#destination.input.input-sm(type='text', name='destination', placeholder='Destination City')
-          button#addCities.btn.btn-primary Add More Destination
-          input#goButton.btn.btn-primary(type='submit', onclick='showText()', value="Let's go!")
-
-      script.
         
-        $("#addCities").click(function() {
-          $('#DestinationCities tbody>tr:last').clone(true).insertAfter('#DestinationCities tbody>tr:last');
-          $('#DestinationCities tbody>tr:last #city').val('');
-            return false;
-          });
-           
-        var destinationCity = $('#DestinationCities').val();
-        
->>>>>>> Stashed changes
