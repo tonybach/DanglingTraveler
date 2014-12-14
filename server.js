@@ -13,9 +13,8 @@ var yelp = require("yelp").createClient({
   token_secret: "DtvBltjVHnWPyFXRw2WJYw3ff0o"
 });
 
+var destinationArray=[];
 var app = express();
-
-var restaurantArray = [];
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -78,18 +77,23 @@ app.get('/USMap/:city?/:category?', function(req, res) {
 
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
-	var restaurants=[]
-	yelp.search({term: "", location: destination, sort: 2}, function(error, data) {
-  		console.log(error);
-  		for (var i = 0; i < 5; i++) {
-  			restaurants.push(data.businesses[i].location.display_address.join());
-  		}
-  		console.log(restaurants);
-		res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
+	console.log(destination);
+	for(var i=0; i<destination.length;i++){
+		console.log(destination[i]);
+		var restaurants=[]
+		yelp.search({term: "", location: destination[i], sort: 2}, function(error, data) {
+	  		console.log(error);
+	  		for (var i = 0; i < 5; i++) {
+	  			restaurants.push(data.businesses[i].location.display_address.join());
+	  		}
+	  		console.log(restaurants);
+			res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
 
-  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
-		//if (error) throw error;
-	//})
+	  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
+			//if (error) throw error;
+		//})
+		
   		
 	});
+	}
 })

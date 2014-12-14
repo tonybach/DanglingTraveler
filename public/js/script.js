@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
 // -------------------------------------
 // RESTAURANT & ATTRACTION DROPDOWNS
 // -------------------------------------
@@ -87,6 +86,8 @@ $(document).ready(function () {
 // MARKER DATA
 // -------------------------------------
 	// // <![CDATA[
+
+	
 	var USMarkers = {"markers": [
 		{"name": destination, "icon": "../../img/orange_pin_2.png", "baloon_text": ""}
 	]};
