@@ -77,24 +77,25 @@ app.get('/USMap/:city?/:category?', function(req, res) {
 
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
-	console.log(destination);
+	console.log(typeof destination);
 	for(var i=0; i<destination.length;i++){
-		console.log(destination[i]);
 		var restaurants=[]
 		yelp.search({term: "", location: destination[i], sort: 2}, function(error, data) {
 	  		console.log(error);
 	  		for (var i = 0; i < 5; i++) {
 	  			restaurants.push(data.businesses[i].location.display_address.join());
 	  		}
-	  		console.log(restaurants);
-			
+	  		
+			console.log(restaurants);
+			res.render('USMap', {destination: JSON.stringify(destination), restaurants: JSON.stringify(restaurants)});
 
 	  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
 			//if (error) throw error;
 		//})
 		
   		
-	});
+		});
 	}
-	res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
+	
+
 })

@@ -86,11 +86,13 @@ $(document).ready(function () {
 // MARKER DATA
 // -------------------------------------
 	// // <![CDATA[
-
+	console.log(destination,typeof destination);
 	
-	var USMarkers = {"markers": [
-		{"name": destination, "icon": "../../img/orange_pin_2.png", "baloon_text": ""}
-	]};
+	var USMarkers = {"markers": []};
+		for (var i = 0; i<destination.length; i++) {
+			USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
+		}
+		console.log(USMarkers);
 
 	cityMarkers = {"markers": []};
 	for (var i = 0; i< restaurant_list.length; i++) {

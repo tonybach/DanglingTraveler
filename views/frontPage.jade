@@ -25,9 +25,7 @@ html
           #addCities
             
       script.
-        $("input").geocomplete({
-        componentRestrictions: {country: 'us'}
-        })
+        
         var maxCities = 3;
         var currentCities = 1;
 
@@ -51,4 +49,8 @@ html
           currentCities--;
         }
         var destinationCity = $('#DestinationCity').val();
+
+        $("input").geocomplete({
+        componentRestrictions: {country: 'us'}
+        })
         
