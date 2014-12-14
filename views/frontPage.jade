@@ -30,10 +30,13 @@ html
         })
         var maxCities = 3;
         var currentCities = 1;
+
         function add_cities() {
           if (currentCities < maxCities) {
             var nextIDNo = currentCities+1;
             var currentID = 'my'+nextIDNo+'Div';
+            var formID = 'form'+currentID;
+            console.log(currentID);
             document.getElementById('wrapper').innerHTML += '<div id=currentID><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities()" value="-" class="btn btn-default removeButton"></div>';
             $("input").geocomplete({
               componentRestrictions: {country: 'us'}
@@ -45,6 +48,7 @@ html
           var currentID = 'my'+currentCities+'Div';
           var el = document.getElementById('currentID');
           el.parentNode.removeChild(el);
+          currentCities--;
         }
         var destinationCity = $('#DestinationCity').val();
         
