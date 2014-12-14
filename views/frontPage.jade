@@ -31,9 +31,21 @@ html
         var maxCities = 3;
         var currentCities = 1;
         function add_cities() {
-          if (currentCities < 3) {
-            document.getElementById('wrapper').innerHTML += '<p class="small"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities();" value="-" class="btn btn-default removeButton"></p>';
+          if (currentCities < maxCities) {
+            var nextIDNo = currentCities+1;
+            var currentID = 'my'+nextIDNo+'Div';
+            console.log(currentID);
+            document.getElementById('wrapper').innerHTML += '<div id=currentID><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities();" value="-" class="btn btn-default removeButton"></div>';
+            currentCities++;
+            console.log(currentCities);
           }          
+        }
+        function remove_cities() {
+          console.log(currentCities);
+          var currentID = 'my'+currentCities+'Div';
+          var el = document.getElementById('currentID');
+          el.parentNode.removeChild(el);
+          currentCities--;
         }
         var destinationCity = $('#DestinationCity').val();
         
