@@ -38,6 +38,32 @@ html, body {
   height: 100%;
 }
 
+/*Button round style*/
+.btn-circle {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  line-height: 1.42;
+  border-radius: 25px;
+  background-color: #FF0066;
+  border-color: transparent;
+}
+
+#goButton {
+	margin-left: 10px;
+}
+
+.addButton {
+	margin-left: 3px;
+}
+
+.removeButton {
+	margin-left: 3px;
+}
 /*-------------------------*/
 /*US Map Page*/
 

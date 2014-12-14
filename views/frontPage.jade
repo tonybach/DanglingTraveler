@@ -12,24 +12,26 @@ html
     script(type='text/javascript', src='js/script.js') 
     meta(charset='UTF-8')
     #background
-      img.stretch(src='img/roadtrip.jpg', alt='')
+      img.stretch(src='img/Urban_Background.jpg', alt='')
     body
       .container
         form#travelform(action='USMap', method='POST')
           .row
-            input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:150px', value='')
-            input#goButton.btn.btn-primary(type='submit', value="Let's go!")
-
-          input#DestinationCity.btn.btn-primary(type='button', onclick='add_cities();', value='Add More Cities')
+            input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:300px', value='')
+            input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
+            input#goButton.btn-circle(type='submit', value="GO!")
+          #wrapper.content  
           #addCities
-            #wrapper.content
-
-
+            
       script.
         $("input").geocomplete({
         componentRestrictions: {country: 'us'}
         })
+        var maxCities = 3;
+        var currentCities = 1;
         function add_cities() {
-          document.getElementById('wrapper').innerHTML += '<span><input type="text"><small></small></span>\r\n';
+          if (currentCities < 3) {
+            document.getElementById('wrapper').innerHTML += '<br><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities();" value="-" class="btn btn-default removeButton"></br>';
+          }          
         }
         var destinationCity = $('#DestinationCity').val();
