@@ -31,7 +31,7 @@ html
         var currentCities = 1;
         function add_cities() {
           if (currentCities < 3) {
-            document.getElementById('wrapper').innerHTML += '<br><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities();" value="-" class="btn btn-default removeButton"></br>';
+            document.getElementById('wrapper').innerHTML += '<p class="small"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities();" value="-" class="btn btn-default removeButton"></p>';
           }          
         }
         var destinationCity = $('#DestinationCity').val();
