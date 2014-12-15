@@ -52,16 +52,25 @@ html, body {
   border-color: transparent;
 }
 
+.extraCities {
+	height: 40px;
+}
+
 #goButton {
 	margin-left: 10px;
 }
 
 .addButton {
 	margin-left: 3px;
+	text-align: center;
+	font-weight: bold;
 }
 
-.removeButton {
+.delete {
 	margin-left: 3px;
+	text-align: center;
+	font-weight: bold;
+	width: 34px;	
 }
 
 br {
@@ -70,8 +79,7 @@ br {
 }
 
 #wrapper {
-	margin-left: -65px;
-	padding-left: -65px;
+	margin-left: -61px;
 }
 /*-------------------------*/
 /*US Map Page*/
