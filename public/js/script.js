@@ -87,22 +87,9 @@ $(document).ready(function () {
 // -------------------------------------
 	// // <![CDATA[		
 	//console.log(destination,typeof destination);
-	if(typeof destination=="string"){
-		console.log(destination);
-		var USMarkers = {"markers": [
-		{"name": destination, "icon": "../../img/orange_pin_2.png", "baloon_text": ""}
-		]};
-		console.log(USMarkers);
-
-	}
-
-	else{
-
-		var USMarkers = {"markers": []};
-			for (var i = 0; i<destination.length; i++) {
-				USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
-			}
-			console.log(USMarkers);
+	var USMarkers = {"markers": []};
+		for (var i = 0; i<destination.length; i++) {
+			USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
 		}
 
 	cityMarkers = {"markers": []};
