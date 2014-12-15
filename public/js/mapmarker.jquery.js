@@ -56,7 +56,8 @@
 						map: map, 
 						position: results[0].geometry.location,
 						animation: google.maps.Animation.DROP,
-						icon: icon
+						icon: icon,
+						myURL: "http://localhost:8080/USMap/"+encodeURI(destination[i])+"/general"
 					});
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
@@ -81,31 +82,18 @@
 						
 					});
 
+					
 					google.maps.event.addListener(marker, 'click', function() {
 						// Close all open infowindows
 						if (infowindow) {
 							infowindow.close();
 						}
-
+						
 						infowindow.open(map,marker);
-						console.log("lol",typeof destination);
-						var destinationString;
-						for(var i=0; i<destination.length;i++){
-							destinationString=destination[i].toString();
-							console.log(destinationString);
-							geocoder.geocode({'address': destinationString}, function(results, status) {
-								if (status == google.maps.GeocoderStatus.OK) {
-									var markerLocation = marker.position;
-									var resultLocation = results[0].geometry.location
-									if (markerLocation.k == resultLocation.k && markerLocation.D == resultLocation.D) {
-										window.location.href = "http://localhost:8080/USMap/" + destinationString + "/general";
-									}
-								}
-							})
-						}
-						 console.log(destination, typeof destination);
+						console.log(marker.myURL);
+						window.location.href = marker.myURL;
 
-						// console.log(marker);
+						 //console.log(marker);
 						// window.location.href = "http://localhost:8080/USMap/Atlanta";
 						// $('.cityMap').css('visibility','visible');
 						// $('.cityMapOptions').css('visibility', 'visible');

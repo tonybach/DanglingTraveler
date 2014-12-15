@@ -3,7 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoskin = require('mongoskin');
-var db = mongoskin.db('mongodb://@141.140.178.25:27017/travellerApp', {safe: true});
+var db = mongoskin.db('mongodb://@localhost/travellerApp', {safe: true});
 var collections= { yelpData: db.collection('yelpData')};
 
 var yelp = require("yelp").createClient({
@@ -60,6 +60,8 @@ app.get('/USMap/:city?/:category?', function(req, res) {
 	  			restaurants.push(data.businesses[i].location.display_address.join());
 	  		}
 			console.log(restaurants);
+			destination = "[" + destination + "]";
+			console.log(destination,typeof destination);
 			res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants)});  		
 		});
 	}
@@ -77,24 +79,29 @@ app.get('/USMap/:city?/:category?', function(req, res) {
 
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
-	console.log(typeof destination);
+	console.log(destination,destination.length,typeof destination);
+
 	for(var i=0; i<destination.length;i++){
 		var restaurants=[]
 		yelp.search({term: "", location: destination[i], sort: 2}, function(error, data) {
 	  		console.log(error);
+
 	  		for (var i = 0; i < 5; i++) {
 	  			restaurants.push(data.businesses[i].location.display_address.join());
 	  		}
 	  		
 			console.log(restaurants);
+			
+			
 			res.render('USMap', {destination: JSON.stringify(destination), restaurants: JSON.stringify(restaurants)});
 
-	  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
-			//if (error) throw error;
-		//})
+	  		
 		
   		
 		});
+
+
+
 	}
 	
 
