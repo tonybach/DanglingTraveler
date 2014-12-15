@@ -21,8 +21,7 @@ html
             input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:300px', value='')
             input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
             input#goButton.btn-circle(type='submit', value="GO!")
-          #wrapper.content  
-          #addCities
+          #wrapper 
             
       script.
         
@@ -31,23 +30,18 @@ html
 
         function add_cities() {
           if (currentCities < maxCities) {
-            var nextIDNo = currentCities+1;
-            var currentID = 'my'+nextIDNo+'Div';
-            var formID = 'form'+currentID;
-            console.log(currentID);
-            document.getElementById('wrapper').innerHTML += '<div id=currentID><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities()" value="-" class="btn btn-default removeButton"></div>';
+            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"></input><button class="btn btn-default delete">-</button></div>');
             $("input").geocomplete({
               componentRestrictions: {country: 'us'}
             })
             currentCities++;
           }          
         }
-        function remove_cities() {
-          var currentID = 'my'+currentCities+'Div';
-          var el = document.getElementById('currentID');
-          el.parentNode.removeChild(el);
+
+        $("body").on("click", ".delete",function(e) {
+          $(this).parent("div").remove();
           currentCities--;
-        }
+        });
         var destinationCity = $('#DestinationCity').val();
 
         $("input").geocomplete({
