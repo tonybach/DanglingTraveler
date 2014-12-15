@@ -49,16 +49,25 @@
 			name=the_marker.name;
 			icon=the_marker.icon;
 			var baloon_text=the_marker.baloon_text;
+
+			var myURL;
+			if(typeof destination!="string"){
+				myURL="http://localhost:8080/USMap/"+encodeURI(destination[i])+"/general";
+			}else{
+				myURL="http://localhost:8080/USMap/"+encodeURI(destination)+"/general";
+			}
+
 			
-			geocoder.geocode({'address': name}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					var marker = new google.maps.Marker({
-						map: map, 
-						position: results[0].geometry.location,
-						animation: google.maps.Animation.DROP,
-						icon: icon,
-						myURL: "http://localhost:8080/USMap/"+encodeURI(destination[i])+"/general"
-					});
+				geocoder.geocode({'address': name}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var marker = new google.maps.Marker({
+							map: map, 
+							position: results[0].geometry.location,
+							animation: google.maps.Animation.DROP,
+							icon: icon,
+							myURL: myURL
+						});
+
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
 							// Close all open infowindows
