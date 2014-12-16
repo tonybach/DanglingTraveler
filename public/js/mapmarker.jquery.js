@@ -49,15 +49,25 @@
 			name=the_marker.name;
 			icon=the_marker.icon;
 			var baloon_text=the_marker.baloon_text;
+
+			var myURL;
+			if(typeof destination!="string"){
+				myURL="http://localhost:8080/USMap/"+encodeURI(destination[i])+"/restaurants/arts";
+			}else{
+				myURL="http://localhost:8080/USMap/"+encodeURI(destination)+"/restaurants/arts";
+			}
+
 			
-			geocoder.geocode({'address': name}, function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					var marker = new google.maps.Marker({
-						map: map, 
-						position: results[0].geometry.location,
-						animation: google.maps.Animation.DROP,
-						icon: icon
-					});
+				geocoder.geocode({'address': name}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var marker = new google.maps.Marker({
+							map: map, 
+							position: results[0].geometry.location,
+							animation: google.maps.Animation.DROP,
+							icon: icon,
+							myURL: myURL
+						});
+
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
 							// Close all open infowindows
@@ -81,21 +91,24 @@
 						
 					// });
 
+					
 					google.maps.event.addListener(marker, 'click', function() {
 						// Close all open infowindows
 						if (infowindow) {
 							infowindow.close();
 						}
+						
+						infowindow.open(map,marker);
+						console.log(marker.myURL);
+						window.location.href = marker.myURL;
 
-						geocoder.geocode({'address': destination}, function(results, status) {
-							if (status == google.maps.GeocoderStatus.OK) {
-								var markerLocation = marker.position;
-								var resultLocation = results[0].geometry.location;
-								if (markerLocation.k == resultLocation.k && markerLocation.D == resultLocation.D) {
-									window.location.href = "http://localhost:8080/USMap/" + destination + "/restaurants/arts";
-								}
-							}
-						})
+						 //console.log(marker);
+						// window.location.href = "http://localhost:8080/USMap/Atlanta";
+						// $('.cityMap').css('visibility','visible');
+						// $('.cityMapOptions').css('visibility', 'visible');
+						// $('.USmap').css('opacity', '0.3');
+						// $('#buttons').css('visibility', 'hidden');
+						// $('#popup').css('visibility','hidden');
 					});
 				} 
 				else {

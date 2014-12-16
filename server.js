@@ -2,9 +2,12 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var mongoskin = require('mongoskin');
-var db = mongoskin.db('mongodb://@141.140.178.25:27017/travellerApp', {safe: true});
-var collections= { yelpData: db.collection('yelpData')};
+//Using native mongodb client
+var MongoClient = require('mongodb').MongoClient, assert = require('assert');
+var url = 'mongodb://@localhost:27017/travellerApp';
+//var mongoskin = require('mongoskin');
+//var db = mongoskin.db('mongodb://@localhost/travellerApp', {safe: true});
+//var collections= { yelpData: db.collection('yelpData')};
 
 var yelp = require("yelp").createClient({
   consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
@@ -32,6 +35,7 @@ var server = app.listen(8080, function() {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+/*
 app.use(function(req, res, next) {
 	if (!collections.yelpData) {
 		return next(new Error('No Collections.'));
@@ -40,7 +44,7 @@ app.use(function(req, res, next) {
 	req.collections = collections;
 	next();
 })
-
+*/
 
 app.get('/', function(req, res) {
 	res.render('frontPage');
@@ -59,7 +63,6 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 	  		console.log(error);
 	  		for (var i = 0; i < 5; i++) {
 	  			var restaurant = data.businesses[i];
-	  			// console.log(restaurant);
 	  			restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': restaurant.categories.join(), 'phone:': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
 	  			// restaurants.push({'address': restaurant.location.display_address.join()});
 	  		}
@@ -78,15 +81,71 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 			})
 		});
 	}
-})
-
-// remove yelp search for both get and post US Map
-	
-app.get('/USMap', function(req, res) {
-	res.render('USMap', {destination: destination});
+	else {
+		res.render('USMap', {destination: JSON.stringify(destination)});
+	}
 })
 
 app.post('/USMap', function(req, res) {
-	destination = req.body.destination;
-	res.render('USMap', {destination: destination});
+	var destination = req.body.destination;
+	// console.log(destination);
+	res.render('USMap', {destination: JSON.stringify(destination)});
 })
+	// restaurants=[]
+	// if(typeof destination!="string"){
+	// 	for(var i=0; i<destination.length;i++){
+	// 		yelp.search({term: "", location: destination[i], sort: 2}, function(error, data) {
+	// 	  		console.log(error);
+	// 	  		MongoClient.connect(url, function(err, db) {
+	// 	            assert.equal(null, err);
+	// 	            console.log("Connected correctly to server");
+	// 	            db.collection('yelpData').update({"Destination":destination[i]},{"Destination":destination[i] ,"Restaurants":restaurants},{upsert: true},function(err,r){
+		        		
+	// 	        	db.close();
+	// 	     		});
+	// 	     		 db.close();
+	// 	          //});
+	// 	         });   
+
+	// 	  		for (var i = 0; i < 5; i++) {
+
+	// 	  			restaurants.push(data.businesses[i].location.display_address.join());
+		  			
+	// 	  		}
+		  	
+	// 			console.log(restaurants);
+						
+	// 				res.render('USMap', {destination: JSON.stringify(destination), restaurants: JSON.stringify(restaurants)});
+				
+	// 		});
+	// 	}
+	// }
+	// else{
+	// 	yelp.search({category_filter: "restaurants", location: destination, sort: 2}, function(error, data) {
+	//   		console.log(error);
+
+	//   		for (var i = 0; i < 5; i++) {
+	//   			restaurants.push(data.businesses[i].location.display_address.join());
+	//   		}
+	// 		attractions = [];
+	// 		yelp.search({category_filter: "arts", location: destination, sort: 2}, function(error2, data2) {
+	// 			console.log(error2);
+	// 			for (var j = 0; j < 5; j++) {
+	// 				attractions.push(data2.businesses[j].location.display_address.join());
+	// 			}
+	// 			MongoClient.connect(url, function(err, db) {
+	//             assert.equal(null, err);
+	//             console.log("Connected correctly to server");
+	//             db.collection('yelpData').update({"Destination":destination},{"Destination":destination ,"Restaurants":restaurants, "Attractions":attractions},{upsert: true},function(err,r){	
+	//         		db.close();
+	//          	});
+
+	//             db.close();
+	//           //});
+	//              });   
+	          
+	// 			console.log(destination,restaurants,attractions);
+	// 			res.render('USMap', {destination: JSON.stringify(destination), restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions)});
+	// 		})
+	// 	});
+	// }

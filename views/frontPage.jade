@@ -13,7 +13,7 @@ html
     meta(charset='UTF-8')
     
     #background
-      img.stretch(src='img/road-trip-ideas.jpg', alt='')
+      img.stretch(src='img/Urban_Background.jpg', alt='')
     body
       .container
         form#travelform(action='USMap', method='POST')
@@ -21,33 +21,28 @@ html
             input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:300px', value='')
             input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
             input#goButton.btn-circle(type='submit', value="GO!")
-          #wrapper.content  
-          #addCities
-            #wrapper.content
+          #wrapper 
+            
       script.
         var maxCities = 3;
         var currentCities = 1;
 
-        $("input").geocomplete({
-        componentRestrictions: {country: 'us'}
-        })
         
         function add_cities() {
           if (currentCities < maxCities) {
-            var nextIDNo = currentCities+1;
-            var currentID = 'my'+nextIDNo+'Div';
-            var formID = 'form'+currentID;
-            console.log(currentID);
-            document.getElementById('wrapper').innerHTML += '<div id=currentID><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"><input id="DestinationCity" type="button" onclick="remove_cities()" value="-" class="btn btn-default removeButton"></div>';
+            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"></input><button class="btn btn-default delete">-</button></div>');
             $("input").geocomplete({
               componentRestrictions: {country: 'us'}
             })
             currentCities++;
           }          
         }
-        function remove_cities() {
-          var currentID = 'my'+currentCities+'Div';
-          var el = document.getElementById('currentID');
-          el.parentNode.removeChild(el);
+
+        $("body").on("click", ".delete",function(e) {
+          $(this).parent("div").remove();
           currentCities--;
-        }
+        })
+
+        $("input").geocomplete({
+        componentRestrictions: {country: 'us'}
+        })

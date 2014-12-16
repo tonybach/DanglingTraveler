@@ -82,30 +82,28 @@ $(document).ready(function () {
     	$.magnificPopup.close();
 	});
 
-	// console.log(destination);
+	console.log(destination);
 	// console.log(restaurant_list);
 
 // -------------------------------------
 // MARKER DATA
 // -------------------------------------
-	// // <![CDATA[
-// <<<<<<< Updated upstream
-// 	console.log(destination,typeof destination);
-	
-// 	var USMarkers = {"markers": []};
-// 		for (var i = 0; i<destination.length; i++) {
-// 			USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
-// 		}
-// 		console.log(USMarkers);
-// =======
-	var USMarkers = {"markers": [
-		{"name": destination, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""}
-	]};
+	// <![CDATA[		
+	//console.log(destination,typeof destination);
+
+	if (typeof destination!="string"){
+		var USMarkers = {"markers": []};
+		for (var i = 0; i<destination.length; i++) {
+			USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
+		}
+	} 
+	else {
+		var USMarkers={"markers":[{"name": destination, "icon": "../../img/orange_pin_2.png", "baloon_text": ""}]};
+	}
 
 	if (typeof(restaurant_list) !== 'undefined' && typeof(attraction_list) !== 'undefined') {
 		var cityMarkers = {"markers": []};
 		for (var i = 0; i<restaurant_list.length; i++) {
-			// console.log(restaurant_list[i]);
 			// var img = document.createElement('img');
 			// img.crossOrigin = 'anonymous';
 			// img.src = restaurant_list[i].img;
