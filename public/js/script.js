@@ -64,7 +64,7 @@ $(document).ready(function () {
 	});
 
 // -------------------------------------
-// CHANGE SEARCH BUTTON
+// CHANGE SEARCH & PRINT ROUTE SUMMARY
 // -------------------------------------
 	$('.ChangeSearch').on('click', function() {
 		$('#popup').css('display', 'block');
@@ -84,6 +84,10 @@ $(document).ready(function () {
 
 	console.log(destination);
 	// console.log(restaurant_list);
+
+	$('.USMapPageButtons').on('click', function() {
+		window.location.href = "http://localhost:8080/USMap/print";
+	})
 
 // -------------------------------------
 // MARKER DATA
@@ -112,12 +116,12 @@ $(document).ready(function () {
 			var attraction=attraction_list[i];
 			
 			
-			cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/blue_pin_2.png", "baloon_text": "<h4>" + restaurant_list[i].name + "</h4><div style = 'float: right;'><img src='" + restaurant_list[i].img + "'width='120' height='120'/></div><div><div><img src = '" + restaurant_list[i].rating_img + "' width = '75' height = '20'>   " + restaurant_list[i].review_count + " reviews</div><div style = 'font-size: 14px;'>" + restaurant_list[i].categories + "</div><div style = 'font-size: 14px;'>" + restaurant_list[i].address + "</div><div style = 'font-size: 14px;'>" + restaurant_list[i].phone + "</div><div style = 'font-style: italic;'>" + restaurant_list[i].snippet_text + "</div><div style = 'clear: both; text-align: center'><form action = '#' method = 'POST'><input type='hidden' id= 'hiddenField' name='id' value='"+restaurant.address+","+restaurant.name+","+restaurant.categories+","+restaurant.phone+"' /><input class = 'btn btn-primary' type = 'submit' id='LocalStorage' value = 'Save!'></form></div></div>"})
+			cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/blue_pin_2.png", "baloon_text": "<h4>" + restaurant_list[i].name + "</h4><div style = 'float: right;'><img src='" + restaurant_list[i].img + "'width='120' height='120'/></div><div><div><img src = '" + restaurant_list[i].rating_img + "' width = '75' height = '20'>   " + restaurant_list[i].review_count + " reviews</div><div style = 'font-size: 14px;'>" + restaurant_list[i].categories + "</div><div style = 'font-size: 14px;'>" + restaurant_list[i].address + "</div><div style = 'font-size: 14px;'>" + restaurant_list[i].phone + "</div><div style = 'font-style: italic;'>" + restaurant_list[i].snippet_text + "</div><div style = 'clear: both; text-align: center'><form action = '/USMap/" + destination + "/restaurants/arts' method = 'POST'><input type='hidden' id= 'hiddenField' name='id' value='"+destination + "*"+restaurant.address+"*"+restaurant.name+"*"+restaurant.categories+"*"+restaurant.phone+"' /><input class = 'btn btn-primary' type = 'submit' id='LocalStorage' value = 'Save!'></form></div></div>"})
 			// }
 			// cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""})		
 		}
 		for (var j = 0; j<attraction_list.length; j++) {
-			cityMarkers.markers.push({"name": attraction_list[j].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": "<h4>" + attraction_list[j].name + "</h4><div style = 'float: right;'><img src='" + attraction_list[j].img + "'width='120' height='120'/></div><div><div><img src = '" + attraction_list[j].rating_img + "' width = '75' height = '20'>   " + attraction_list[j].review_count + " reviews</div><div style = 'font-size: 14px;'>" + attraction_list[j].categories + "</div><div style = 'font-size: 14px;'>" + attraction_list[j].address + "</div><div style = 'font-size: 14px;'>" + attraction_list[j].phone + "</div><div style = 'font-style: italic;'>" + attraction_list[j].snippet_text + "</div><div style = 'clear: both; text-align: center'><form action = '#' method = 'POST'><input type='hidden' id= 'hiddenField' name='id' value='"+attraction.address+","+attraction.name+","+attraction.categories+","+attraction.phone+"' /><input class = 'btn btn-primary' type = 'submit' id='LocalStorage' value = 'Save!'></form></div></div>"})		
+			cityMarkers.markers.push({"name": attraction_list[j].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": "<h4>" + attraction_list[j].name + "</h4><div style = 'float: right;'><img src='" + attraction_list[j].img + "'width='120' height='120'/></div><div><div><img src = '" + attraction_list[j].rating_img + "' width = '75' height = '20'>   " + attraction_list[j].review_count + " reviews</div><div style = 'font-size: 14px;'>" + attraction_list[j].categories + "</div><div style = 'font-size: 14px;'>" + attraction_list[j].address + "</div><div style = 'font-size: 14px;'>" + attraction_list[j].phone + "</div><div style = 'font-style: italic;'>" + attraction_list[j].snippet_text + "</div><div style = 'clear: both; text-align: center'><form action = '/USMap/" + destination + "/restaurants/arts' method = 'POST'><input type='hidden' id= 'hiddenField' name='id' value='" + destination + "*" +attraction.address+"*"+attraction.name+"*"+attraction.categories+"*"+attraction.phone+"' /><input class = 'btn btn-primary' type = 'submit' id='LocalStorage' value = 'Save!'></form></div></div>"})		
 		}
 		$(".cityMap").mapmarker({
 		zoom: 12,
