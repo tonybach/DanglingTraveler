@@ -71,9 +71,9 @@
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
 							// Close all open infowindows
-						if (infowindow) {
-							infowindow.close();
-						}
+						// if (infowindow) {
+						// 	infowindow.close();
+						// }
 						
 						infowindow = new google.maps.InfoWindow({
 							content: baloon_text
@@ -88,7 +88,6 @@
 					// 	if (infowindow) {
 					// 		infowindow.close();
 					// 	}
-						
 					// });
 
 					

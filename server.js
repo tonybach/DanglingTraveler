@@ -63,7 +63,12 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 	  		console.log(error);
 	  		for (var i = 0; i < 5; i++) {
 	  			var restaurant = data.businesses[i];
-	  			restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': restaurant.categories.join(), 'phone:': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
+	  			var categoriesOfRestaurant = restaurant.categories;
+	  			for (var n = 0; n < categoriesOfRestaurant.length; n++) {
+	  				categoriesOfRestaurant[n].splice(1, 1);
+	  			}
+	  			// console.log(restaurant);
+	  			restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': categoriesOfRestaurant.join(), 'phone': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
 	  			// restaurants.push({'address': restaurant.location.display_address.join()});
 	  		}
 			var attractionCategory = req.params.attractionCategory;
@@ -73,8 +78,11 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 				console.log(error2);
 				for (var j = 0; j < 5; j++) {
 					var attraction = data2.businesses[j];
-					// console.log(attraction);
-					attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories:': attraction.categories.join(), 'phone:': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
+		  			var categoriesOfAttraction = attraction.categories;
+		  			for (var n = 0; n < categoriesOfAttraction.length; n++) {
+		  				categoriesOfAttraction[n].splice(1, 1);
+		  			}
+					attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories': categoriesOfAttraction.join(), 'phone': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
 					// attractions.push({'address': attraction.location.display_address.join()});
 				}
 				res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});

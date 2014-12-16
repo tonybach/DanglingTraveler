@@ -108,15 +108,16 @@ $(document).ready(function () {
 			// img.crossOrigin = 'anonymous';
 			// img.src = restaurant_list[i].img;
 			// img.onload = function(e) {
-			cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/blue_pin_2.png", "baloon_text": "<h5>" + restaurant_list[i].name + "</h5><div style = 'float: right;'><img src=" + restaurant_list[i].img + "width='100' height='100'/></div><div><div><img src = '" + restaurant_list[i].rating_img + "' width = '75' height = '25'>   " + restaurant_list[i].review_count + " reviews</div><div>" + restaurant_list[i].categories + "</div><div>" + restaurant_list[i].address + "</div><div>" + restaurant_list[i].snippet_text + "</div></div>"})
+
+			cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/blue_pin_2.png", "baloon_text": "<h4>" + restaurant_list[i].name + "</h4><div style = 'float: right;'><img src=" + restaurant_list[i].img + "width='120' height='120'/></div><div><div><img src = '" + restaurant_list[i].rating_img + "' width = '75' height = '20'>   " + restaurant_list[i].review_count + " reviews</div><div style = 'font-size: 14px;'>" + restaurant_list[i].categories + "</div><div style = 'font-size: 14px;'>" + restaurant_list[i].address + "</div><div style = 'font-size: 14px;'>" + restaurant_list[i].phone + "</div><div style = 'font-style: italic;'>" + restaurant_list[i].snippet_text + "</div><div style = 'clear: both; text-align: center'><form action = '#' method = 'POST'><input class = 'btn btn-primary' type = 'submit' value = 'Save!'></form></div></div>"})
 			// }
 			// cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""})		
 		}
 		for (var j = 0; j<attraction_list.length; j++) {
-			cityMarkers.markers.push({"name": attraction_list[j].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""})		
+			cityMarkers.markers.push({"name": attraction_list[j].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": "<h4>" + attraction_list[j].name + "</h4><div style = 'float: right;'><img src=" + attraction_list[j].img + "width='120' height='120'/></div><div><div><img src = '" + attraction_list[j].rating_img + "' width = '75' height = '20'>   " + attraction_list[j].review_count + " reviews</div><div style = 'font-size: 14px;'>" + attraction_list[j].categories + "</div><div style = 'font-size: 14px;'>" + attraction_list[j].address + "</div><div style = 'font-size: 14px;'>" + attraction_list[j].phone + "</div><div style = 'font-style: italic;'>" + attraction_list[j].snippet_text + "</div><div style = 'clear: both; text-align: center'><form action = '#' method = 'POST'><input class = 'btn btn-primary' type = 'submit' value = 'Save!'></form></div></div>"})		
 		}
 		$(".cityMap").mapmarker({
-		zoom: 10,
+		zoom: 12,
 		center: destination,
 		markers: cityMarkers
 		});
