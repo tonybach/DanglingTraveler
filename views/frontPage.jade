@@ -13,12 +13,12 @@ html
     meta(charset='UTF-8')
     
     #background
-      img.stretch(src='img/Urban_Background.jpg', alt='')
+      img.stretch(src='img/road-trip-ideas.png', alt='')
     body
       .container
         form#travelform(action='USMap', method='POST')
           .row
-            input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:300px', value='')
+            input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:450px', value='')
             input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
             input#goButton.btn-circle(type='submit', value="GO!")
           #wrapper 
@@ -30,7 +30,7 @@ html
 
         function add_cities() {
           if (currentCities < maxCities) {
-            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:300px"></input><button class="btn btn-default delete">-</button></div>');
+            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:450px"></input><button class="btn btn-default delete">-</button></div>');
             $("input").geocomplete({
               componentRestrictions: {country: 'us'}
             })
