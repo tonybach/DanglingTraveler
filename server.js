@@ -94,6 +94,22 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 	}
 })
 
+app.post('/USMap/:destination/restaurants/arts',function(req,res){
+	var restaurant=req.body.id;
+	console.log(restaurant);
+	console.log("success");
+	var Storage = require('dom-storage')
+  	, localStorage = new Storage('./db.json', { strict: false, ws: '  ' })
+
+  	, myValue = { restaurant: restaurant }
+  	;
+
+	localStorage.setItem('restaurant', myValue);
+	myValue = localStorage.getItem('restaurant');
+	console.log(myValue);
+
+	})
+
 app.post('/USMap', function(req, res) {
 	var destination = req.body.destination;
 	res.render('USMap', {destination: JSON.stringify(destination)});
