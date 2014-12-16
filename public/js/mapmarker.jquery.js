@@ -80,6 +80,9 @@
 						});
 						
 						infowindow.open(map,marker);
+						if (infowindow) {
+							setTimeout(function(){infowindow.close();}, 3000);
+						}
 
 					});
 
