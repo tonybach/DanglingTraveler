@@ -79,6 +79,7 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 			  				categoriesOfRestaurant[n].splice(1, 1);
 			  			}
 			  			// console.log(restaurant);
+			  			console.log(restaurant.image_url);
 			  			restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': categoriesOfRestaurant.join(), 'phone': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
 			  			// restaurants.push({'address': restaurant.location.display_address.join()});
 			  		}
@@ -125,8 +126,8 @@ app.post('/USMap/:destination/restaurants/arts',function(req,res){
   	, myValue = { restaurant: restaurant }
   	;
 
-	localStorage.setItem('restaurant', myValue);
-	myValue = localStorage.getItem('restaurant');
+	localStorage.setItem('Saved Preferences', myValue);
+	myValue = localStorage.getItem('Saved Preferences');
 	console.log(myValue);
 
 	})
