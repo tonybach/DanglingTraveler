@@ -10,7 +10,6 @@ $(document).ready(function () {
 
 	var attractions = $("#attractions");
 	var restaurants = $("#restaurants");
-	var cityMarkers;
 
 	$('.restaurants_dropdown').on('shown.bs.dropdown', function() {
 		$('.attractions_dropdown').addClass("attractionsToggle");
@@ -67,6 +66,10 @@ $(document).ready(function () {
 // -------------------------------------
 // CHANGE SEARCH BUTTON
 // -------------------------------------
+	$('.ChangeSearch').on('click', function() {
+		$('#popup').css('display', 'block');
+	});
+
 	$('.ChangeSearch').magnificPopup({
 		type: 'inline',
 		items: {src: '#popup'},
@@ -86,31 +89,47 @@ $(document).ready(function () {
 // MARKER DATA
 // -------------------------------------
 	// // <![CDATA[
-	console.log(destination,typeof destination);
+// <<<<<<< Updated upstream
+// 	console.log(destination,typeof destination);
 	
-	var USMarkers = {"markers": []};
-		for (var i = 0; i<destination.length; i++) {
-			USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
+// 	var USMarkers = {"markers": []};
+// 		for (var i = 0; i<destination.length; i++) {
+// 			USMarkers.markers.push({"name": destination[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
+// 		}
+// 		console.log(USMarkers);
+// =======
+	var USMarkers = {"markers": [
+		{"name": destination, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""}
+	]};
+
+	if (typeof(restaurant_list) !== 'undefined' && typeof(attraction_list) !== 'undefined') {
+		var cityMarkers = {"markers": []};
+		for (var i = 0; i<restaurant_list.length; i++) {
+			// console.log(restaurant_list[i]);
+			// var img = document.createElement('img');
+			// img.crossOrigin = 'anonymous';
+			// img.src = restaurant_list[i].img;
+			// img.onload = function(e) {
+			cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/blue_pin_2.png", "baloon_text": "<h5>" + restaurant_list[i].name + "</h5><div style = 'float: right;'><img src=" + restaurant_list[i].img + "width='100' height='100'/></div><div><div><img src = '" + restaurant_list[i].rating_img + "' width = '75' height = '25'>   " + restaurant_list[i].review_count + " reviews</div><div>" + restaurant_list[i].categories + "</div><div>" + restaurant_list[i].address + "</div><div>" + restaurant_list[i].snippet_text + "</div></div>"})
+			// }
+			// cityMarkers.markers.push({"name": restaurant_list[i].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""})		
 		}
-		console.log(USMarkers);
-
-	cityMarkers = {"markers": []};
-	for (var i = 0; i< restaurant_list.length; i++) {
-		cityMarkers.markers.push({"name": restaurant_list[i], "icon": "../../img/orange_pin_2.png", "baloon_text": ""})
+		for (var j = 0; j<attraction_list.length; j++) {
+			cityMarkers.markers.push({"name": attraction_list[j].address, "icon": "http://localhost:8080/img/orange_pin_2.png", "baloon_text": ""})		
+		}
+		$(".cityMap").mapmarker({
+		zoom: 10,
+		center: destination,
+		markers: cityMarkers
+		});
 	}
-	console.log(cityMarkers);
-
+	 
 	$(".USmap").mapmarker({
 	zoom : 4,
 	center : 'United States',
 	markers : USMarkers
 	});
 
-	$(".cityMap").mapmarker({
-	zoom: 10,
-	center: destination,
-	markers: cityMarkers
-	});
 	//]]
 });
 

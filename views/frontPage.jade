@@ -13,7 +13,7 @@ html
     meta(charset='UTF-8')
     
     #background
-      img.stretch(src='img/Urban_Background.jpg', alt='')
+      img.stretch(src='img/road-trip-ideas.jpg', alt='')
     body
       .container
         form#travelform(action='USMap', method='POST')
@@ -23,12 +23,15 @@ html
             input#goButton.btn-circle(type='submit', value="GO!")
           #wrapper.content  
           #addCities
-            
+            #wrapper.content
       script.
-        
         var maxCities = 3;
         var currentCities = 1;
 
+        $("input").geocomplete({
+        componentRestrictions: {country: 'us'}
+        })
+        
         function add_cities() {
           if (currentCities < maxCities) {
             var nextIDNo = currentCities+1;
@@ -48,9 +51,3 @@ html
           el.parentNode.removeChild(el);
           currentCities--;
         }
-        var destinationCity = $('#DestinationCity').val();
-
-        $("input").geocomplete({
-        componentRestrictions: {country: 'us'}
-        })
-        

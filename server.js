@@ -48,54 +48,45 @@ app.get('/', function(req, res) {
 
 var destination;
 var restaurants;
+var attractions;
 
-app.get('/USMap/:city?/:category?', function(req, res) {
-	if (req.params.city && req.params.category) {
+app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req, res) {
+	if (req.params.city && req.params.restaurantCategory) {
 		destination = req.params.city;
-		var category = req.params.category;
+		var restaurantCategory = req.params.restaurantCategory;
 		restaurants = [];
-		yelp.search({term: category, location: destination, sort: 2}, function(error, data) {
+		yelp.search({category_filter: restaurantCategory, location: destination, sort: 2}, function(error, data) {
 	  		console.log(error);
 	  		for (var i = 0; i < 5; i++) {
-	  			restaurants.push(data.businesses[i].location.display_address.join());
+	  			var restaurant = data.businesses[i];
+	  			// console.log(restaurant);
+	  			restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': restaurant.categories.join(), 'phone:': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
+	  			// restaurants.push({'address': restaurant.location.display_address.join()});
 	  		}
-			console.log(restaurants);
-			res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants)});  		
-		});
-	}
-	else {
-		restaurants = [];
-		yelp.search({term: "", location: destination, sort: 2}, function(error, data) {
-	  		console.log(error);
-	  		for (var i = 0; i < 5; i++) {
-	  			restaurants.push(data.businesses[i].location.display_address.join());
-	  		}
-			res.render('USMap', {destination: destination, restaurants: JSON.stringify(restaurants)});
+			var attractionCategory = req.params.attractionCategory;
+			// attractions = {};
+			attractions = [];
+			yelp.search({category_filter: attractionCategory, location: destination, sort: 2}, function(error2, data2) {
+				console.log(error2);
+				for (var j = 0; j < 5; j++) {
+					var attraction = data2.businesses[j];
+					// console.log(attraction);
+					attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories:': attraction.categories.join(), 'phone:': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
+					// attractions.push({'address': attraction.location.display_address.join()});
+				}
+				res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
+			})
 		});
 	}
 })
 
-app.post('/USMap', function(req, res) {
-	var destination = req.body.destination;
-	console.log(typeof destination);
-	for(var i=0; i<destination.length;i++){
-		var restaurants=[]
-		yelp.search({term: "", location: destination[i], sort: 2}, function(error, data) {
-	  		console.log(error);
-	  		for (var i = 0; i < 5; i++) {
-	  			restaurants.push(data.businesses[i].location.display_address.join());
-	  		}
-	  		
-			console.log(restaurants);
-			res.render('USMap', {destination: JSON.stringify(destination), restaurants: JSON.stringify(restaurants)});
-
-	  		//req.collections.yelpData.insert(restaurantArray, function(error, response){
-			//if (error) throw error;
-		//})
-		
-  		
-		});
-	}
+// remove yelp search for both get and post US Map
 	
+app.get('/USMap', function(req, res) {
+	res.render('USMap', {destination: destination});
+})
 
+app.post('/USMap', function(req, res) {
+	destination = req.body.destination;
+	res.render('USMap', {destination: destination});
 })

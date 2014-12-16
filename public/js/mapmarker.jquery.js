@@ -73,13 +73,13 @@
 
 					});
 
-					google.maps.event.addListener(marker, 'mouseout', function() {
-						// Close all open infowindows
-						if (infowindow) {
-							infowindow.close();
-						}
+					// google.maps.event.addListener(marker, 'mouseout', function() {
+					// 	// Close all open infowindows
+					// 	if (infowindow) {
+					// 		infowindow.close();
+					// 	}
 						
-					});
+					// });
 
 					google.maps.event.addListener(marker, 'click', function() {
 						// Close all open infowindows
@@ -87,31 +87,15 @@
 							infowindow.close();
 						}
 
-						infowindow.open(map,marker);
-						console.log("lol",typeof destination);
-						var destinationString;
-						for(var i=0; i<destination.length;i++){
-							destinationString=destination[i].toString();
-							console.log(destinationString);
-							geocoder.geocode({'address': destinationString}, function(results, status) {
-								if (status == google.maps.GeocoderStatus.OK) {
-									var markerLocation = marker.position;
-									var resultLocation = results[0].geometry.location
-									if (markerLocation.k == resultLocation.k && markerLocation.D == resultLocation.D) {
-										window.location.href = "http://localhost:8080/USMap/" + destinationString + "/general";
-									}
+						geocoder.geocode({'address': destination}, function(results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								var markerLocation = marker.position;
+								var resultLocation = results[0].geometry.location;
+								if (markerLocation.k == resultLocation.k && markerLocation.D == resultLocation.D) {
+									window.location.href = "http://localhost:8080/USMap/" + destination + "/restaurants/arts";
 								}
-							})
-						}
-						 console.log(destination, typeof destination);
-
-						// console.log(marker);
-						// window.location.href = "http://localhost:8080/USMap/Atlanta";
-						// $('.cityMap').css('visibility','visible');
-						// $('.cityMapOptions').css('visibility', 'visible');
-						// $('.USmap').css('opacity', '0.3');
-						// $('#buttons').css('visibility', 'hidden');
-						// $('#popup').css('visibility','hidden');
+							}
+						})
 					});
 				} 
 				else {
