@@ -11,6 +11,7 @@ head
     script(type='text/javascript', src='http://localhost:8080/js/jquery.geocomplete.js') 
     script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     script(type='text/javascript', src='http://localhost:8080/js/mapmarker.jquery.js')
+    script(type='text/javascript', src='js/jquery.geocomplete.js') 
     script.
       var destination = JSON.parse('!{destination}');
     script(type='text/javascript', src='http://localhost:8080/js/script.js')
@@ -27,17 +28,30 @@ head
           img(src='http://localhost:8080/img/road-trip-ideas.jpg', alt='')
         form#popup_travelform(action='http://localhost:8080/USMap', method='POST')
           .row
-            input#DestinationCity.input.input-sm(type='text', name = 'destination', placeholder='Destination City', style='width:150px', value='')
-            input#goButton.btn.btn-primary(type='submit', value="Let's go!")
-          input#moreCities.btn.btn-primary(type='button', onclick='add_cities();', value='Add More Cities')
-          #addCities
-            #wrapper.content
+            .row
+              input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:450px', value='')
+              input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
+              input#goButton.btn-circle(type='submit', value="GO!")
+            #wrapper 
         button#hideChangeSearch.btn.btn-primary Back
     script.
-      $("input").geocomplete({
-      componentRestrictions: {country: 'us'}
-      })
-      function add_cities() {
-        document.getElementById('wrapper').innerHTML += '<span>Next Destination: <input type="text"><small></small></span>\r\n';
-      }
+      
+      var maxCities = 3;
+        var currentCities = 1;
+
+        
+        function add_cities() {
+          if (currentCities < maxCities) {
+            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:450px"></input><button class="btn btn-default delete">-</button></div>');
+            $("input").geocomplete({
+              componentRestrictions: {country: 'us'}
+            })
+            currentCities++;
+          }          
+        }
+
+        $("body").on("click", ".delete",function(e) {
+          $(this).parent("div").remove();
+          currentCities--;
+        })
 
