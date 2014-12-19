@@ -36,14 +36,14 @@ var server = app.listen(8080, function() {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // query the mongoDB database for existing yelp data. If there is none, update the database using the new parameter
-// app.use(function(req, res, next) {
-// 	if (!collections.yelpData) {
-// 		return next(new Error('No Collections.'));
-// 	}
+app.use(function(req, res, next) {
+	if (!collections.yelpData) {
+		return next(new Error('No Collections.'));
+	}
 	
-// 	req.collections = collections;
-// 	next();
-// })
+	req.collections = collections;
+	next();
+})
 
 app.get('/', function(req, res) {
 	res.render('frontPage');
