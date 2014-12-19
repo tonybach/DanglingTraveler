@@ -6,8 +6,8 @@ var bodyParser = require('body-parser');
 //var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var url = 'mongodb://@localhost:27017/travellerApp';
 var mongoskin = require('mongoskin');
-// var db = mongoskin.db('mongodb://@localhost/travellerApp', {safe: true});
-// var collections= { yelpData: db.collection('yelpData')};
+var db = mongoskin.db('mongodb://@localhost/travellerApp', {safe: true});
+var collections= { yelpData: db.collection('yelpData')};
 
 var yelp = require("yelp").createClient({
   consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
