@@ -54,6 +54,12 @@ var restaurants;
 var attractions;
 var savedPreferences = [];
 
+if((typeof alert) === 'undefined') {
+    global.alert = function(message) {
+        console.log(message);
+    }
+}
+
 app.get('/USMap/print', function(req, res) {
 	res.render('printData', {data: savedPreferences});
 })
@@ -77,36 +83,55 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 		// 		console.log('data not found')
 				yelp.search({category_filter: restaurantCategory, location: destination, sort: 2}, function(error, data) {
 			  		console.log(error);
-			  		for (var i = 0; i < 5; i++) {
-			  			var restaurant = data.businesses[i];
-			  			var categoriesOfRestaurant = restaurant.categories;
-			  			for (var n = 0; n < categoriesOfRestaurant.length; n++) {
-			  				categoriesOfRestaurant[n].splice(1, 1);
+			  		var numberOfRestaurants = data.businesses.length;
+			  		if (numberOfRestaurants == 0) {
+			  			alert("There is no " + restaurantCategory + " restaurant in this area!");
+			  		} 
+			  		else {
+			  			if (numberOfRestaurants > 5) {
+			  				numberOfRestaurants = 5;
 			  			}
-			  			// console.log(restaurant);
-			  			console.log(restaurant.image_url);
-			  			restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': categoriesOfRestaurant.join(), 'phone': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
-			  			// restaurants.push({'address': restaurant.location.display_address.join()});
+			  			for (var i = 0; i < numberOfRestaurants; i++) {
+			  				var restaurant = data.businesses[i];
+			  				var categoriesOfRestaurant = restaurant.categories;
+			  				for (var n = 0; n < categoriesOfRestaurant.length; n++) {
+			  					categoriesOfRestaurant[n].splice(1, 1);
+			  				}
+			  				// console.log(restaurant);
+			  				console.log(restaurant.image_url);
+			  				restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': categoriesOfRestaurant.join(), 'phone': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
+			  				// restaurants.push({'address': restaurant.location.display_address.join()});
+			  			}
 			  		}
+
 					var attractionCategory = req.params.attractionCategory;
 					// attractions = {};
 					attractions = [];
 					yelp.search({category_filter: attractionCategory, location: destination, sort: 2}, function(error2, data2) {
 						console.log(error2);
-						for (var j = 0; j < 5; j++) {
-							var attraction = data2.businesses[j];
-				  			var categoriesOfAttraction = attraction.categories;
-				  			for (var n = 0; n < categoriesOfAttraction.length; n++) {
-				  				categoriesOfAttraction[n].splice(1, 1);
-				  			}
-							attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories': categoriesOfAttraction.join(), 'phone': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
-							// attractions.push({'address': attraction.location.display_address.join()});
+						var numberOfAttractions = data2.businesses.length;
+						if (numberOfAttractions == 0) {
+							alert("There is no " + attractionCategory + " in this area!");
+						} else {
+							if (numberOfAttractions > 5) {
+								numberOfAttractions = 5;
+							}
+							for (var j = 0; j < numberOfAttractions; j++) {
+								var attraction = data2.businesses[j];
+					  			var categoriesOfAttraction = attraction.categories;
+					  			for (var n = 0; n < categoriesOfAttraction.length; n++) {
+					  				categoriesOfAttraction[n].splice(1, 1);
+					  			}
+								attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories': categoriesOfAttraction.join(), 'phone': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
+								// attractions.push({'address': attraction.location.display_address.join()});
+							}
+							// push yelp search data into mongoDB
+							// req.collections.yelpData.insert({destination: destination, restaurants: restaurants, attractions: attractions, restaurantCategory: restaurantCategory, attractionCategory: attractionCategory}, function(err, result) {
+							// 	if (err) throw err;
+							// 	if (result) console.log(result);
+							// });	
 						}
-						// push yelp search data into mongoDB
-						// req.collections.yelpData.insert({destination: destination, restaurants: restaurants, attractions: attractions, restaurantCategory: restaurantCategory, attractionCategory: attractionCategory}, function(err, result) {
-						// 	if (err) throw err;
-						// 	if (result) console.log(result);
-						// });
+
 
 						// render city map using data
 						res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
