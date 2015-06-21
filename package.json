@@ -7,6 +7,9 @@
     "type": "git",
     "url": "https://github.com/tonybach/danglingTraveler"
   },
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "body-parser": "^1.9.3",
     "express": "^4.10.2",
