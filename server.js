@@ -36,14 +36,14 @@ var server = app.listen(8080, function() {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // query the mongoDB database for existing yelp data. If there is none, update the database using the new parameter
-app.use(function(req, res, next) {
-	if (!collections.yelpData) {
-		return next(new Error('No Collections.'));
-	}
+// app.use(function(req, res, next) {
+// 	if (!collections.yelpData) {
+// 		return next(new Error('No Collections.'));
+// 	}
 	
-	req.collections = collections;
-	next();
-})
+// 	req.collections = collections;
+// 	next();
+// })
 
 app.get('/', function(req, res) {
 	res.render('frontPage');
@@ -65,16 +65,16 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 		restaurants = [];
 		// look up in mongoDB for city name, if found, render the city Map with restaurants and attractions
 		// if could not locate in database, update mongoDB with Yelp search results
-		req.collections.yelpData.find({destination: destination}).toArray(function(err, result) {
-			if (result.length!=0) {
-				console.log(result);
-				console.log(result[0].restaurants);
-				console.log(result[0].attractionCategory);
-				res.render('cityMap', {destination: destination, restaurants: JSON.stringify(result[0].restaurants), attractions: JSON.stringify(result[0].attractions), restaurantCategory: result[0].restaurantCategory, attractionCategory: result[0].attractionCategory});
-				console.log('data get!')	
-			}
-			else {
-				console.log('data not found')
+		// req.collections.yelpData.find({destination: destination}).toArray(function(err, result) {
+		// 	if (result.length!=0) {
+		// 		console.log(result);
+		// 		console.log(result[0].restaurants);
+		// 		console.log(result[0].attractionCategory);
+		// 		res.render('cityMap', {destination: destination, restaurants: JSON.stringify(result[0].restaurants), attractions: JSON.stringify(result[0].attractions), restaurantCategory: result[0].restaurantCategory, attractionCategory: result[0].attractionCategory});
+		// 		console.log('data get!')	
+		// 	}
+		// 	else {
+		// 		console.log('data not found')
 				yelp.search({category_filter: restaurantCategory, location: destination, sort: 2}, function(error, data) {
 			  		console.log(error);
 			  		for (var i = 0; i < 5; i++) {
@@ -103,18 +103,18 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 							// attractions.push({'address': attraction.location.display_address.join()});
 						}
 						// push yelp search data into mongoDB
-						req.collections.yelpData.insert({destination: destination, restaurants: restaurants, attractions: attractions, restaurantCategory: restaurantCategory, attractionCategory: attractionCategory}, function(err, result) {
-							if (err) throw err;
-							if (result) console.log(result);
-						});
+						// req.collections.yelpData.insert({destination: destination, restaurants: restaurants, attractions: attractions, restaurantCategory: restaurantCategory, attractionCategory: attractionCategory}, function(err, result) {
+						// 	if (err) throw err;
+						// 	if (result) console.log(result);
+						// });
 
 						// render city map using data
 						res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
 					})
 				});				
-			}	
-		})	
-	}
+			// }	
+		}	
+	// })
 	else {
 		res.render('USMap', {destination: JSON.stringify(destination)});
 	}

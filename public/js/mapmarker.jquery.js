@@ -70,28 +70,22 @@
 
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
-							// Close all open infowindows
-						// if (infowindow) {
-						// 	infowindow.close();
-						// }
 						
 						infowindow = new google.maps.InfoWindow({
 							content: baloon_text
 						});
 						
 						infowindow.open(map,marker);
-						if (infowindow) {
-							setTimeout(function(){infowindow.close();}, 3000);
-						}
+
 
 					});
 
-					// google.maps.event.addListener(marker, 'mouseout', function() {
-					// 	// Close all open infowindows
-					// 	if (infowindow) {
-					// 		infowindow.close();
-					// 	}
-					// });
+					google.maps.event.addListener(marker, 'mouseout', function() {
+						// Close all open infowindows
+						if (infowindow) {
+							infowindow.close();
+						}
+					});
 
 					
 					google.maps.event.addListener(marker, 'click', function() {

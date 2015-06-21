@@ -2,9 +2,10 @@
   "name": "the-dangling-traveler",
   "description": "travel app",
   "version": "1.0.0",
+  "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mac-comp346-f14/danglingpointers"
+    "url": "https://github.com/tonybach/danglingTraveler"
   },
   "dependencies": {
     "body-parser": "^1.9.3",
@@ -16,5 +17,8 @@
     "path": "^0.4.9",
     "yelp": "^0.1.1",
     "mongodb":"*"
+  },
+  "engines": {
+    "node": "0.12.x"
   }
 }
