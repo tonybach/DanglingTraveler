@@ -52,9 +52,9 @@
 
 			var myURL;
 			if(typeof destination!="string"){
-				myURL="http://localhost:8080/USMap/"+encodeURI(destination[i])+"/restaurants/arts";
+				myURL="/USMap/"+encodeURI(destination[i])+"/restaurants/arts";
 			}else{
-				myURL="http://localhost:8080/USMap/"+encodeURI(destination)+"/restaurants/arts";
+				myURL="/USMap/"+encodeURI(destination)+"/restaurants/arts";
 			}
 
 			

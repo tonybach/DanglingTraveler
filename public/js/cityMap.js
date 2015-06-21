@@ -27,8 +27,8 @@ $(function() {
 })
 
 function restaurantSubmitForm() {
-  document.restaurantSearchForm.action = "http://localhost:8080/USMap/" + destination + "/" + $("#restaurantCategory").val() + "/" + attractionCategory;
+  document.restaurantSearchForm.action = "/USMap/" + destination + "/" + $("#restaurantCategory").val() + "/" + attractionCategory;
 };
 function attractionSubmitForm() {
-  document.attractionSearchForm.action = "http://localhost:8080/USMap/" + destination + "/" + restaurantCategory + "/" + $("#attractionCategory").val();
+  document.attractionSearchForm.action = "/USMap/" + destination + "/" + restaurantCategory + "/" + $("#attractionCategory").val();
 };
