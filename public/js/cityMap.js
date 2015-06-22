@@ -1,7 +1,6 @@
 $(function() {
   $.getJSON("https://jsonp.nodejitsu.com/?callback=?&url=https://raw.githubusercontent.com/Yelp/yelp-api/master/category_lists/en/category.json", function (data) {
     var restaurantTags = [];
-    console.log(data);
     var restaurantCategories = [data[7].category, data[20].category];
     for (var i = 0; i < restaurantCategories.length; i++) {
       for (var j = 0; j < restaurantCategories[i].length; j++) {

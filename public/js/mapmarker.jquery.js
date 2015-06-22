@@ -47,56 +47,59 @@
 		//run the marker JSON loop here
 		$.each(markers.markers, function(i, the_marker){
 			name=the_marker.name;
-			icon=the_marker.icon;
 			var baloon_text=the_marker.baloon_text;
 
 			var myURL;
-			if(typeof destination!="string"){
-				myURL="/USMap/"+encodeURI(destination[i])+"/restaurants/arts";
-			}else{
-				myURL="/USMap/"+encodeURI(destination)+"/restaurants/arts";
+
+			if (typeof destination!="string") {
+				if (name == destination[i]) {
+					myURL="/USMap/"+encodeURI(destination[i])+"/restaurants/arts";
+				}
+			} else {
+				if (name == destination) {
+					myURL="/USMap/"+encodeURI(destination)+"/restaurants/arts";
+				}
 			}
 
+			// var infowindow = new google.maps.InfoWindow({});
 			
-				geocoder.geocode({'address': name}, function(results, status) {
-					if (status == google.maps.GeocoderStatus.OK) {
-						var marker = new google.maps.Marker({
-							map: map, 
-							position: results[0].geometry.location,
-							animation: google.maps.Animation.DROP,
-							icon: icon,
-							myURL: myURL
-						});
-
+			geocoder.geocode({'address': name}, function(results, status) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					var marker = new google.maps.Marker({
+						map: map, 
+						position: results[0].geometry.location,
+						animation: google.maps.Animation.DROP,
+						icon: the_marker.icon,
+						myURL: myURL
+					});
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
-						
+						if (infowindow) {
+							infowindow.close();
+							infowindow.setContent('');
+						}
+						// if (baloon_text != infowindow.getContent()) {
+							// infowindow.setContent(baloon_text);
 						infowindow = new google.maps.InfoWindow({
 							content: baloon_text
 						});
-						
 						infowindow.open(map,marker);
 
-
+						
 					});
-
-					google.maps.event.addListener(marker, 'mouseout', function() {
-						// Close all open infowindows
-						if (infowindow) {
-							infowindow.close();
-						}
-					});
-
 					
 					google.maps.event.addListener(marker, 'click', function() {
 						// Close all open infowindows
-						if (infowindow) {
+						if (baloon_text == infowindow.getContent()) {
 							infowindow.close();
+							infowindow.setContent('');
+						} else {
+							google.maps.event.trigger(marker, 'mouseover');
 						}
 						
-						infowindow.open(map,marker);
-						console.log(marker.myURL);
-						window.location.href = marker.myURL;
+						if (marker.myURL != null) {
+							window.location.href = marker.myURL;
+						}
 
 						 //console.log(marker);
 						// window.location.href = "http://localhost:8080/USMap/Atlanta";
@@ -106,11 +109,24 @@
 						// $('#buttons').css('visibility', 'hidden');
 						// $('#popup').css('visibility','hidden');
 					});
-				} 
+
+					// google.maps.event.addListener(infowindow, 'closeclick', function() {
+					// 	infowindow.setContent('');
+					// 	console.log("yo!");
+					// });
+
+					// google.maps.event.addListener(infowindow, 'domready', function() {
+					// 	document.getElementById("restaurantSave").addEventListener("click", function() {
+					// 		console.log("hi!");
+					// 		document.getElementById("restaurantSave").value = "Hello!";
+					// 	})
+					// });
+				}
+			
 				else {
 					alert("Geocode was not successful for the following reason " + status);
 				}
-			});
+			});	
 				//console.log(marker);
 				// Set up markers with info windows 
 		});
