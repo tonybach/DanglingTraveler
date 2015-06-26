@@ -52,7 +52,7 @@ $(document).ready(function () {
 // -------------------------------------
 	$(".backToUSMap").click(function() {
 		// console.log(parent.history);
-		// window.history.go('http://localhost:8080/USMap');
+		// window.history.go(-1);
 		// return false;
 	// 	// $('.cityMap').css('visibility','hidden');
 	// 	// $('.cityMapOptions').css('visibility','hidden');
@@ -60,7 +60,7 @@ $(document).ready(function () {
 	// 	// $('#buttons').css('visibility', 'visible');
 	// 	// $('.USMapPageButtons').css('opacity', '1');
 	// 	// $('#popup').css('visibility','visible');
-		window.location.href = "http://localhost:8080/USMap/"
+		window.location.href = "/USMap/"
 	});
 
 // -------------------------------------
