@@ -53,6 +53,7 @@ var destination;
 var restaurants;
 var attractions;
 var savedPreferences = [];
+var visitsToCityMap = 0;
 
 if((typeof alert) === 'undefined') {
     global.alert = function(message) {
@@ -69,86 +70,91 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 		destination = req.params.city;
 		var restaurantCategory = req.params.restaurantCategory;
 		restaurants = [];
-		// look up in mongoDB for city name, if found, render the city Map with restaurants and attractions
-		// if could not locate in database, update mongoDB with Yelp search results
-				yelp.search({category_filter: restaurantCategory, location: destination, sort: 2}, function(error, data) {
-			  		console.log(error);
-			  		var numberOfRestaurants = data.businesses.length;
-			  		if (numberOfRestaurants == 0) {
-			  			alert("There is no " + restaurantCategory + " restaurant in this area!");
-			  		} 
-			  		else {
-			  			if (numberOfRestaurants > 5) {
-			  				numberOfRestaurants = 5;
+		
+		// Use Yelp API to search for restaurants
+		yelp.search({category_filter: restaurantCategory, location: destination, sort: 2}, function(error, data) {
+	  		console.log(error);
+	  		var numberOfRestaurants = data.businesses.length;
+	  		if (numberOfRestaurants == 0) {
+	  			alert("There is no " + restaurantCategory + " restaurant in this area!");
+	  		} 
+	  		else {
+	  			if (numberOfRestaurants > 5) {
+	  				numberOfRestaurants = 5;
+	  			}
+	  			for (var i = 0; i < numberOfRestaurants; i++) {
+	  				var restaurant = data.businesses[i];
+	  				var categoriesOfRestaurant = restaurant.categories;
+	  				for (var n = 0; n < categoriesOfRestaurant.length; n++) {
+	  					categoriesOfRestaurant[n].splice(1, 1);
+	  				}
+	  				restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': categoriesOfRestaurant.join(), 'phone': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
+	  			}
+	  		}
+
+			var attractionCategory = req.params.attractionCategory;
+
+			// search for attractions
+			attractions = [];
+			yelp.search({category_filter: attractionCategory, location: destination, sort: 2}, function(error2, data2) {
+				console.log(error2);
+				var numberOfAttractions = data2.businesses.length;
+				if (numberOfAttractions == 0) {
+					alert("There is no " + attractionCategory + " in this area!");
+				} else {
+					if (numberOfAttractions > 5) {
+						numberOfAttractions = 5;
+					}
+					for (var j = 0; j < numberOfAttractions; j++) {
+						var attraction = data2.businesses[j];
+			  			var categoriesOfAttraction = attraction.categories;
+			  			for (var n = 0; n < categoriesOfAttraction.length; n++) {
+			  				categoriesOfAttraction[n].splice(1, 1);
 			  			}
-			  			for (var i = 0; i < numberOfRestaurants; i++) {
-			  				var restaurant = data.businesses[i];
-			  				var categoriesOfRestaurant = restaurant.categories;
-			  				for (var n = 0; n < categoriesOfRestaurant.length; n++) {
-			  					categoriesOfRestaurant[n].splice(1, 1);
-			  				}
-			  				restaurants.push({'address': restaurant.location.display_address.join(), 'name': restaurant.name, 'categories': categoriesOfRestaurant.join(), 'phone': restaurant.display_phone, 'img' : restaurant.image_url, 'rating_img': restaurant.rating_img_url_large, 'snippet_text': restaurant.snippet_text, 'review_count': restaurant.review_count});
-			  				// restaurants.push({'address': restaurant.location.display_address.join()});
-			  			}
-			  		}
+						attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories': categoriesOfAttraction.join(), 'phone': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
+					}
+				}
 
-					var attractionCategory = req.params.attractionCategory;
-					// attractions = {};
-					attractions = [];
-					yelp.search({category_filter: attractionCategory, location: destination, sort: 2}, function(error2, data2) {
-						console.log(error2);
-						var numberOfAttractions = data2.businesses.length;
-						if (numberOfAttractions == 0) {
-							alert("There is no " + attractionCategory + " in this area!");
-						} else {
-							if (numberOfAttractions > 5) {
-								numberOfAttractions = 5;
-							}
-							for (var j = 0; j < numberOfAttractions; j++) {
-								var attraction = data2.businesses[j];
-					  			var categoriesOfAttraction = attraction.categories;
-					  			for (var n = 0; n < categoriesOfAttraction.length; n++) {
-					  				categoriesOfAttraction[n].splice(1, 1);
-					  			}
-								attractions.push({'address': attraction.location.display_address.join(), 'name': attraction.name, 'categories': categoriesOfAttraction.join(), 'phone': attraction.display_phone, 'img' : attraction.image_url, 'rating_img': attraction.rating_img_url_large, 'snippet_text': attraction.snippet_text, 'review_count': attraction.review_count});
-								// attractions.push({'address': attraction.location.display_address.join()});
-							}
-							// push yelp search data into mongoDB
-						}
-
-
-						// render city map using data
-						res.render('cityMap', {destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
-					})
-				});				
+				// render city map using data
+				// console.log(visits);
+				if (restaurantCategory == "restaurants" && attractionCategory == "arts") {
+					visitsToCityMap = 1;
+				} else {
+					visitsToCityMap = visitsToCityMap + 1;
+				}
+				res.render('cityMap', {visitsToCityMap: visitsToCityMap, destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
+			})
+		});				
 			// }	
-		}	
+	}	
 	// })
 	else {
 		res.render('USMap', {destination: JSON.stringify(destination)});
 	}
 })
 
-app.post('/USMap/:destination/restaurants/arts',function(req,res){
-	var restaurant=req.body.id;
-	console.log(restaurant);
-	console.log("success");
-	var Storage = require('dom-storage')
-  	, localStorage = new Storage('./db.json', { strict: false, ws: '  ' })
+// app.post('/USMap/:destination/restaurants/arts',function(req,res){
+// 	console.log(visits);
+// 	var restaurant=req.body.id;
+// 	console.log(restaurant);
+// 	console.log("success");
+// 	var Storage = require('dom-storage')
+//   	, localStorage = new Storage('./db.json', { strict: false, ws: '  ' })
 
-  	// , myValue = { restaurant: restaurant }
+//   	// , myValue = { restaurant: restaurant }
 
-  	;
+//   	;
 
-	// localStorage.setItem('Saved Preferences', myValue);
-	localStorage.setItem('Saved Preferences', restaurant);
-	myValue = localStorage.getItem('Saved Preferences');
-	myValue = myValue.split("*");
-	savedPreferences.push(myValue)
-	console.log(myValue);
-	console.log(savedPreferences);
-	// res.send("Save successful!");
-	})
+// 	// localStorage.setItem('Saved Preferences', myValue);
+// 	localStorage.setItem('Saved Preferences', restaurant);
+// 	myValue = localStorage.getItem('Saved Preferences');
+// 	myValue = myValue.split("*");
+// 	savedPreferences.push(myValue)
+// 	console.log(myValue);
+// 	console.log(savedPreferences);
+// 	render('cityMap', {visits: visits, destination: destination, restaurants: "restaurants", attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
+// 	// res.send("Save successful!");
+// })
 
 
 app.post('/USMap', function(req, res) {

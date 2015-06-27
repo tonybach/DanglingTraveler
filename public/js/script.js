@@ -52,7 +52,7 @@ $(document).ready(function () {
 // -------------------------------------
 	$(".backToUSMap").click(function() {
 		// console.log(parent.history);
-		// window.history.go(-1);
+		window.history.go(-parseInt(visitsToCityMap));
 		// return false;
 	// 	// $('.cityMap').css('visibility','hidden');
 	// 	// $('.cityMapOptions').css('visibility','hidden');
@@ -60,7 +60,7 @@ $(document).ready(function () {
 	// 	// $('#buttons').css('visibility', 'visible');
 	// 	// $('.USMapPageButtons').css('opacity', '1');
 	// 	// $('#popup').css('visibility','visible');
-		window.location.href = "/USMap/"
+		// window.location.href = "/USMap/"
 	});
 
 // -------------------------------------
@@ -83,6 +83,8 @@ $(document).ready(function () {
 	});
 
 	console.log(destination);
+	// console.log(visits);
+
 	// console.log(restaurant_list);
 
 	$('.USMapPageButtons').on('click', function() {
