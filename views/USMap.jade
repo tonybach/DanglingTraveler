@@ -25,11 +25,12 @@ head
       .USmap
       #popup
         #popup_background
-          img(src='/img/road-trip-ideas.jpg', alt='')
-        form#popup_travelform(action='/USMap', method='POST')
+          img(src='/img/road-trip-ideas.png', alt='')
+        span.glyphicon.glyphicon-remove-sign#closePopup
+        form#popup_travelform(action='/USMap', method='POST' autocomplete = 'off')
           .row
             .row
-              input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:450px', value='')
+              input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:450px', value='' autocomplete = 'off')
               input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
               input#goButton.btn-circle(type='submit', value="GO!")
             #wrapper 
@@ -38,17 +39,20 @@ head
       
       var maxCities = 3;
         var currentCities = 1;
-
         
         function add_cities() {
           if (currentCities < maxCities) {
-            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:450px"></input><button class="btn btn-default delete">-</button></div>');
+            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Destination City" class="input input-sm" style="width:450px" ></input><button class="btn btn-default delete">-</button></div>');
             $("input").geocomplete({
               componentRestrictions: {country: 'us'}
             })
             currentCities++;
           }          
         }
+
+        $("input").geocomplete({
+        componentRestrictions: {country: 'us'}
+        })
 
         $("body").on("click", ".delete",function(e) {
           $(this).parent("div").remove();

@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var dialog = require('dialog');
 //Using native mongodb client
 //var MongoClient = require('mongodb').MongoClient, assert = require('assert');
 var url = 'mongodb://@localhost:27017/travellerApp';
@@ -73,10 +74,21 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 		
 		// Use Yelp API to search for restaurants
 		yelp.search({category_filter: restaurantCategory, location: destination, sort: 2}, function(error, data) {
-	  		console.log(error);
+	  		// console.log(error);
+	  		var numberOfRestaurants;
+	  		try {
+	  			if (data.businesses == null) {
+	  				throw new Error("No restaurant in this area!");
+	  			} else {
+	  				numberOfRestaurants = data.businesses.length;
+	  			}
+	  		} catch(error) {
+	  			console.log(error);
+	  		};
+
 	  		var numberOfRestaurants = data.businesses.length;
 	  		if (numberOfRestaurants == 0) {
-	  			alert("There is no " + restaurantCategory + " restaurant in this area!");
+	  			dialog.warn("There are no " + restaurantCategory + " restaurant in this area!", "Sorry!");
 	  		} 
 	  		else {
 	  			if (numberOfRestaurants > 5) {
@@ -97,10 +109,21 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 			// search for attractions
 			attractions = [];
 			yelp.search({category_filter: attractionCategory, location: destination, sort: 2}, function(error2, data2) {
-				console.log(error2);
-				var numberOfAttractions = data2.businesses.length;
+				// console.log(error2);
+				var numberOfAttractions;
+				try {
+					if (data2.businesses == null) {
+						throw new Error("No attraction in this area!");
+					} else {
+						numberOfAttractions = data2.businesses.length;	
+					}
+
+				} catch(error2) {
+					console.log(error2);
+				};
+				
 				if (numberOfAttractions == 0) {
-					alert("There is no " + attractionCategory + " in this area!");
+					dialog.warn("There are no " + attractionCategory + " in this area!", "Sorry!");
 				} else {
 					if (numberOfAttractions > 5) {
 						numberOfAttractions = 5;

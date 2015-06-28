@@ -12,14 +12,15 @@
   },
   "dependencies": {
     "body-parser": "^1.9.3",
+    "dialog": "^0.1.8",
     "express": "^4.10.2",
     "jade": "^1.8.1",
     "magnific-popup": "^0.9.9",
+    "mongodb": "*",
     "mongoskin": "^1.4.4",
     "morgan": "^1.5.0",
     "path": "^0.4.9",
-    "yelp": "^0.1.1",
-    "mongodb":"*"
+    "yelp": "^0.1.1"
   },
   "engines": {
     "node": "0.12.x"
