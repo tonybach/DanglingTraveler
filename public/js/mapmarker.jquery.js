@@ -105,7 +105,11 @@
 							document.getElementById("restaurantSave").addEventListener("click", function() {
 								var hiddenFieldRestaurant = document.getElementById("hiddenFieldRestaurant").value;
 								var currentStorage = localStorage.getItem('Saved Preferences');
-								currentStorage += hiddenFieldRestaurant;
+								if (currentStorage == null) {
+									currentStorage = hiddenFieldRestaurant;
+								} else {
+									currentStorage += hiddenFieldRestaurant;
+								}
 								localStorage.setItem('Saved Preferences', currentStorage);
 								console.log(localStorage.getItem('Saved Preferences'));
 								// var listPreference = document.querySelector('.listPreference');
