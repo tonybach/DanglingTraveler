@@ -19,6 +19,22 @@
 		center	: 'United States',
 		markers	: defaultMarkers
 	}
+
+	function testFunc() {
+		console.log("hello world");
+	}
+
+	// function saveToLocalStorage(htmlText) {
+	//   	// , myValue = { restaurant: restaurant };
+
+	// 	// localStorage.setItem('Saved Preferences', myValue);
+	// 	localStorage.setItem('Saved Preferences', htmlText);
+	// 	myValue = localStorage.getItem('Saved Preferences');
+	// 	// myValue = myValue.split("*");
+	// 	savedPreferences.push(myValue)
+	// 	console.log(myValue);
+	// 	console.log(savedPreferences);			
+	// }
 	
 	// Main function code here (ref:google map api v3)
 	function addMapMarker(map_element, zoom, center, markers){
@@ -31,7 +47,7 @@
 		}
 		var map = new google.maps.Map(map_element, myOptions);
 		var geocoder = new google.maps.Geocoder();
-		var infowindow = null;
+		var infowindow = new google.maps.InfoWindow({});
 		var baloon_text = "";
 		
 		geocoder.geocode( { 'address': center}, function(results, status) {
@@ -63,7 +79,9 @@
 
 			// var infowindow = new google.maps.InfoWindow({});
 			
+
 			geocoder.geocode({'address': name}, function(results, status) {
+
 				if (status == google.maps.GeocoderStatus.OK) {
 					var marker = new google.maps.Marker({
 						map: map, 
@@ -78,13 +96,22 @@
 							infowindow.close();
 							infowindow.setContent('');
 						}
-						// if (baloon_text != infowindow.getContent()) {
-							// infowindow.setContent(baloon_text);
+
 						infowindow = new google.maps.InfoWindow({
 							content: baloon_text
 						});
-						infowindow.open(map,marker);
 
+						// google.maps.event.addListener(infowindow, 'domready', function() {
+						// 	document.getElementById("restaurantSave").addEventListener("click", function() {
+						// 		localStorage.setItem('Saved Preferences', baloon_text);
+						// 		var myValue = localStorage.getItem('Saved Preferences');
+						// 		console.log(myValue);
+						// 		console.log(localStorage);
+						// 		// document.getElementById("restaurantSave").value = "Hello!";
+						// 	});
+						// });
+
+						infowindow.open(map,marker);
 						
 					});
 					
@@ -101,31 +128,13 @@
 							window.location.href = marker.myURL;
 						}
 
-						 //console.log(marker);
-						// window.location.href = "http://localhost:8080/USMap/Atlanta";
-						// $('.cityMap').css('visibility','visible');
-						// $('.cityMapOptions').css('visibility', 'visible');
-						// $('.USmap').css('opacity', '0.3');
-						// $('#buttons').css('visibility', 'hidden');
-						// $('#popup').css('visibility','hidden');
 					});
-
-					// google.maps.event.addListener(infowindow, 'closeclick', function() {
-					// 	infowindow.setContent('');
-					// 	console.log("yo!");
-					// });
-
-					// google.maps.event.addListener(infowindow, 'domready', function() {
-					// 	document.getElementById("restaurantSave").addEventListener("click", function() {
-					// 		console.log("hi!");
-					// 		document.getElementById("restaurantSave").value = "Hello!";
-					// 	})
-					// });
 				}
 			
 				else {
 					alert("Geocode was not successful for the following reason " + status);
 				}
+
 			});	
 				//console.log(marker);
 				// Set up markers with info windows 

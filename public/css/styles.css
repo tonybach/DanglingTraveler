@@ -259,3 +259,16 @@ ul.dropdown-menu {
 ul.dropdown-menu li {
 	font-size: 1.3em;
 }
+
+/*-------------------------*/
+/* Print Data Page */
+
+div.savedPreferencesWrapper {
+	width: 1000px;
+	display: block;
+	margin: auto;
+}
+
+h1#savedPreferencesTitle {
+	text-align: center;
+}

@@ -1,9 +1,13 @@
 doctype html(lang='en')
 html
 head
+	meta(charset='utf-8')
+	meta(name='viewport', content='width=device-width, initial-scale=1')
+	link(rel='stylesheet', type='text/css', href='/css/styles.css')
 	title Saved Preferences
+
 body
-	h1 Saved Preferences
+	h1#savedPreferencesTitle Saved Preferences
 	ol
 		ul
-			li=data
+			!=data

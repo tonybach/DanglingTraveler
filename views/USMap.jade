@@ -27,10 +27,10 @@ head
         #popup_background
           img(src='/img/road-trip-ideas.png', alt='')
         span.glyphicon.glyphicon-remove-sign#closePopup
-        form#popup_travelform(action='/USMap', method='POST' autocomplete = 'off')
+        form#popup_travelform(action='/USMap', method='POST' autocomplete = 'false')
           .row
             .row
-              input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:450px', value='' autocomplete = 'off')
+              input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Destination City', style='width:450px', value='' autocomplete = 'false')
               input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
               input#goButton.btn-circle(type='submit', value="GO!")
             #wrapper 
