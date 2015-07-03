@@ -3,7 +3,7 @@ $(document).ready(function () {
 // -------------------------------------
 // BACK TO US MAP BUTTON
 // -------------------------------------
-	$(".backToUSMap").click(function() {
+	$(".backToUSMapFromCityMap").click(function() {
 		// console.log(parent.history);
 		window.history.go(-parseInt(visitsToCityMap));
 		// return false;
@@ -49,6 +49,7 @@ $(document).ready(function () {
 		window.location.href = "/USMap/print";
 	})
 
+
 // -------------------------------------
 // MARKER DATA
 // -------------------------------------
@@ -71,7 +72,7 @@ $(document).ready(function () {
 			var restaurant = restaurant_list[i];
 			restaurant.snippet_text = restaurant.snippet_text.replace(/'/g, "&#39;");
 			restaurant.name = restaurant.name.replace(/'/g, "&#39;");
-			var baloonTextWithoutSave = "<div class = &#39;savedPreferencesWrapper&#39;> <h4>" + restaurant.name + "</h4><div style = &#39;float: right;&#39;><img src=" + restaurant.img + " width=120 height=120 /></div><div><div><img src = " + restaurant.rating_img + " width = 75 height = 20/>   " + restaurant.review_count + " reviews</div><div style = &#39;font-size: 14px;&#39;> <u> Kind of restaurant:</u> " + restaurant.categories + "</div><div style = &#39;font-size: 14px;&#39;> <u> Address:</u> " + restaurant.address + "</div><div style = &#39;font-size: 14px;&#39;> <u> Phone number:</u> " + restaurant.phone + "</div><div> <u style = &#39;font-size: 14px;&#39;> Review snippet:</u> <i>" + restaurant.snippet_text + "</i></div></div>" + "'><button class = 'btn btn-primary LocalStorage' id = 'restaurantSave' type = 'button'> Save</button></div></div></div>";
+			var baloonTextWithoutSave = "<div class = &#39;savedPreferencesWrapper&#39;> <h4>" + restaurant.name + "</h4><div style = &#39;float: right;&#39;><img src=" + restaurant.img + " width=120 height=120 /></div><div><div><img src = " + restaurant.rating_img + " width = 75 height = 20/>   " + restaurant.review_count + " reviews</div><div style = &#39;font-size: 14px;&#39;> <u> Kind of restaurant:</u> " + restaurant.categories + "</div><div style = &#39;font-size: 14px;&#39;> <u> Address:</u> " + restaurant.address + "</div><div style = &#39;font-size: 14px;&#39;> <u> Phone number:</u> " + restaurant.phone + "</div><div> <u style = &#39;font-size: 14px;&#39;> Review snippet:</u> <i>" + restaurant.snippet_text + "</i></div></div></div>" + "'><button class = 'btn btn-primary LocalStorage' id = 'restaurantSave' type = 'button'> Save</button></div></div></div>";
 			var baloonTextWithSave =  "<h4>" + restaurant.name + "</h4><div style = 'float: right;'><img src='" + restaurant.img + "'width='120' height='120'/></div><div><div><img src = '" + restaurant.rating_img + "' width = '75' height = '20'>   " + restaurant.review_count + " reviews</div><div style = 'font-size: 14px;'> <u> Kind of restaurant:</u> " + restaurant.categories + "</div><div style = 'font-size: 14px;'> <u> Address:</u> " + restaurant.address + "</div><div style = 'font-size: 14px;'> <u> Phone number:</u> " + restaurant.phone + "</div><div> <u style = 'font-size: 14px;'> Review snippet:</u> <i>" + restaurant.snippet_text + "</i></div><div style = 'clear: both; text-align: center'><form action = '/USMap/" + destination + "/restaurants/arts' method = 'POST'><input type='hidden' class= 'hiddenField' name='id' id = 'hiddenFieldRestaurant' value= '" + baloonTextWithoutSave;
 			var baloonTextWithSave2 =  "<h4>" + restaurant.name + "</h4><div style = 'float: right;'><img src='" + restaurant.img + "'width='120' height='120'/></div><div><div><img src = '" + restaurant.rating_img + "' width = '75' height = '20'>   " + restaurant.review_count + " reviews</div><div style = 'font-size: 14px;'> <u> Kind of restaurant:</u> " + restaurant.categories + "</div><div style = 'font-size: 14px;'> <u> Address:</u> " + restaurant.address + "</div><div style = 'font-size: 14px;'> <u> Phone number:</u> " + restaurant.phone + "</div><div> <u style = 'font-size: 14px;'> Review snippet:</u> <i>" + restaurant.snippet_text + "</i></div><div style = 'clear: both; text-align: center'><input type='hidden' class= 'hiddenField' name='id' value= '" + baloonTextWithoutSave;
 

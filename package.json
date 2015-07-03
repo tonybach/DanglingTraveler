@@ -20,6 +20,7 @@
     "mongoskin": "^1.4.4",
     "morgan": "^1.5.0",
     "path": "^0.4.9",
+    "sweetalert": "^1.0.1",
     "yelp": "^0.1.1"
   },
   "engines": {
