@@ -3,6 +3,7 @@ html
 head
 	meta(charset='utf-8')
 	meta(name='viewport', content='width=device-width, initial-scale=1')
+	script(type='text/javascript', src='https://code.jquery.com/jquery-1.11.0.min.js ')
 	link(rel='stylesheet', type='text/css', href='/css/styles.css')
 	title Saved Preferences
 
@@ -10,4 +11,9 @@ body
 	h1#savedPreferencesTitle Saved Preferences
 	ol
 		ul
-			!=data
+			.listPreference
+				
+
+	script.
+		var localStorageData = localStorage.getItem('Saved Preferences');
+		document.querySelector('.listPreference').innerHTML = localStorageData;

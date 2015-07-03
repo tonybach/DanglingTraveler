@@ -66,10 +66,10 @@ if((typeof alert) === 'undefined') {
 }
 
 app.get('/USMap/print', function(req, res) {
-	savedPreferences = localStorage.getItem("Saved Preferences");
-	console.log(savedPreferences);
+	// savedPreferences = localStorage.getItem("Saved Preferences");
+	// console.log(savedPreferences);
 	// console.log(localStorage.getItem("Saved Preferences"));
-	res.render('printData', {data: savedPreferences});
+	res.render('printData');
 })
 
 app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req, res) {
@@ -162,29 +162,29 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 	}
 })
 
-app.post('/USMap/:destination/restaurants/arts',function(req,res){
-	var restaurant=req.body.id;
-	console.log(restaurant);
-	console.log("success");
-	// var Storage = require('dom-storage')
-  	// , localStorage = new Storage('./db.json', { strict: false, ws: '  ' })
+// app.post('/USMap/:destination/restaurants/arts',function(req,res){
+// 	var restaurant=req.body.id;
+// 	console.log(restaurant);
+// 	console.log("success");
+// 	// var Storage = require('dom-storage')
+//   	// , localStorage = new Storage('./db.json', { strict: false, ws: '  ' })
 
-  	// , myValue = { restaurant: restaurant }
+//   	// , myValue = { restaurant: restaurant }
 
-  	// ;
+//   	// ;
 
-	// localStorage.setItem('Saved Preferences', myValue);
-	savedPreferences.push(restaurant);
-	localStorage.setItem('Saved Preferences', savedPreferences);
-	// console.log(localStorage);
-	// myValue = localStorage.getItem('Saved Preferences');
-	// myValue = myValue.split("*");
-	// savedPreferences.push(myValue)
-	// console.log(myValue);
-	// console.log(savedPreferences);
-	// res.render('cityMap', {destination: destination, restaurants: "restaurants", attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
-	// res.send("Save successful!");
-})
+// 	// localStorage.setItem('Saved Preferences', myValue);
+// 	savedPreferences.push(restaurant);
+// 	localStorage.setItem('Saved Preferences', savedPreferences);
+// 	// console.log(localStorage);
+// 	// myValue = localStorage.getItem('Saved Preferences');
+// 	// myValue = myValue.split("*");
+// 	// savedPreferences.push(myValue)
+// 	// console.log(myValue);
+// 	// console.log(savedPreferences);
+// 	// res.render('cityMap', {destination: destination, restaurants: "restaurants", attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
+// 	// res.send("Save successful!");
+// })
 
 
 app.post('/USMap', function(req, res) {

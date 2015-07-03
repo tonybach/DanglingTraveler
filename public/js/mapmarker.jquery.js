@@ -101,15 +101,21 @@
 							content: baloon_text
 						});
 
-						// google.maps.event.addListener(infowindow, 'domready', function() {
-						// 	document.getElementById("restaurantSave").addEventListener("click", function() {
-						// 		localStorage.setItem('Saved Preferences', baloon_text);
-						// 		var myValue = localStorage.getItem('Saved Preferences');
-						// 		console.log(myValue);
-						// 		console.log(localStorage);
-						// 		// document.getElementById("restaurantSave").value = "Hello!";
-						// 	});
-						// });
+						google.maps.event.addListener(infowindow, 'domready', function() {
+							document.getElementById("restaurantSave").addEventListener("click", function() {
+								var hiddenFieldRestaurant = document.getElementById("hiddenFieldRestaurant").value;
+								var currentStorage = localStorage.getItem('Saved Preferences');
+								currentStorage += hiddenFieldRestaurant;
+								localStorage.setItem('Saved Preferences', currentStorage);
+								console.log(localStorage.getItem('Saved Preferences'));
+								// var listPreference = document.querySelector('.listPreference');
+								// console.log(listPreference);
+								// var myValue = localStorage.getItem('Saved Preferences');
+								// console.log(myValue);
+								// console.log(localStorage);
+								// document.getElementById("restaurantSave").value = "Hello!";
+							});
+						});
 
 						infowindow.open(map,marker);
 						
