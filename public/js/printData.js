@@ -45,9 +45,16 @@ $(document).ready(function () {
     	saveAs(blob, "savedData.xhtml");
 	})
 
+	// $('.removeSavedPlace').on('mouseover', function() {
+	// 	$('.removeSavedPlaceConfirmation').css('display', 'block');
+	// })
+
+	// $('.removeSavedPlace').on('mouseout', function() {
+	// 	$('.removeSavedPlaceConfirmation').css('display', 'none');
+	// })
+
 	$('.removeSavedPlace').on('click', function() {
 		var currentLocalStorage = localStorage.getItem('Saved Preferences');
-
 		var thisWrapper = $(this).closest(".savedPreferencesWrapper");
 		var placeNameOfThisWrapper = $(thisWrapper).find('h4').text();
 		var indexOfPlaceName = currentLocalStorage.indexOf(placeNameOfThisWrapper);
@@ -61,12 +68,31 @@ $(document).ready(function () {
 
 		// part of local storage string that represents the clicked place
 		var localStorageLocationString = currentLocalStorage.substring(indexOfPlaceName - 97, indexOfNextPlaceName - 97);
-		currentLocalStorage = currentLocalStorage.replace(localStorageLocationString, "");
 
-		// remove the location string from local storage
-		localStorage.setItem('Saved Preferences', currentLocalStorage);
+		sweetAlert({
+			title: "Are you sure?",  
+			text: "TThe selected restaurant/attraction will be removed.",   
+			type: "warning",   
+			showCancelButton: true,   
+			confirmButtonColor: "#DD6B55",   
+			confirmButtonText: "Yes, remove",   
+			cancelButtonText: "No, keep it",   
+			closeOnConfirm: false,   
+			closeOnCancel: false }, 
+			function(isConfirm){   
+				if (isConfirm) {     
+					sweetAlert("Deleted!", "This restaurant/attraction has been removed", "success");
+					currentLocalStorage = currentLocalStorage.replace(localStorageLocationString, "");
+					
+					// remove the location string from local storage
+					localStorage.setItem('Saved Preferences', currentLocalStorage);
 
-		// remove the location HTML from the DOM
-		thisWrapper.remove();
+					// remove the location HTML from the DOM
+					thisWrapper.remove();
+				} else {     
+					sweetAlert("Cancelled", "Your choices are safe :)", "error");   
+				} 
+			});
+
 	})
 })

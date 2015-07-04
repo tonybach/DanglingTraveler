@@ -241,7 +241,7 @@ form[name="attractionSearchForm"] input[type="submit"] {
 #dummyInput {
 	display: none;
 }
-.backToUSMap {
+.backToUSMapFromCityMap {
 	position: fixed;
 	bottom: 6%;
 	left: 6.7%;
@@ -285,3 +285,11 @@ h1#savedPreferencesTitle {
 	float: right;
 	cursor: pointer;
 }
+
+.removeSavedPlaceConfirmation {
+	display: none;
+}
+
+/*.restaurantSaved:hover {*/
+	/*width: 400px;/*/
+/*}*/

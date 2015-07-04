@@ -92,6 +92,10 @@
 					});
 
 					google.maps.event.addListener(marker, 'mouseover', function() {
+
+						// checking to see if the place is already saved, then show the appropriate value for
+						// the Save button.
+
 						if (infowindow) {
 							infowindow.close();
 							infowindow.setContent('');
@@ -102,23 +106,63 @@
 						});
 
 						google.maps.event.addListener(infowindow, 'domready', function() {
+							var currentStorage;
+
+							// document.getElementById("restaurantSave").addEventListener("mouseover", function() {
+							// 	console.log("yo!");
+							// })
 							document.getElementById("restaurantSave").addEventListener("click", function() {
+								// console.log('no :(');
+
+								currentStorage = localStorage.getItem('Saved Preferences');
 								var hiddenFieldRestaurant = document.getElementById("hiddenFieldRestaurant").value;
-								var currentStorage = localStorage.getItem('Saved Preferences');
 								if (currentStorage == null) {
 									currentStorage = hiddenFieldRestaurant;
 								} else {
-									currentStorage += hiddenFieldRestaurant;
+									if (currentStorage.indexOf(hiddenFieldRestaurant) > -1) {
+										currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldRestaurant), hiddenFieldRestaurant.length), "")
+									} else {
+										currentStorage += hiddenFieldRestaurant;
+									}
 								}
 								localStorage.setItem('Saved Preferences', currentStorage);
-								console.log(localStorage.getItem('Saved Preferences'));
-								// var listPreference = document.querySelector('.listPreference');
-								// console.log(listPreference);
-								// var myValue = localStorage.getItem('Saved Preferences');
-								// console.log(myValue);
-								// console.log(localStorage);
-								// document.getElementById("restaurantSave").value = "Hello!";
+
+								// change the Save button to Saved, or vice-versa
+
+								if (baloon_text.indexOf('</h4>') > -1) {
+									var placeName = baloon_text.substring(4, baloon_text.indexOf('</h4>'));
+
+									if (localStorage.getItem('Saved Preferences') && localStorage.getItem('Saved Preferences').indexOf(placeName) > -1) {
+										baloon_text = baloon_text.replace("btn-primary", "btn-success");
+										baloon_text = baloon_text.replace("'button'>Save", "'button'>Saved!");
+									} else if (baloon_text.indexOf("btn-success") > -1) {
+										baloon_text = baloon_text.replace("btn-success", "btn-primary");
+										baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Save");
+									}
+								}
+
+								infowindow.close();
+								infowindow.setContent('');
+								infowindow = new google.maps.InfoWindow({
+									content: baloon_text
+								});
+								infowindow.open(map, marker);
+								// console.log(baloon_text);
 							});
+
+							document.getElementById("attractionSave").addEventListener("click", function() {
+								console.log('yay!');
+
+								currentStorage = localStorage.getItem('Saved Preferences');
+								var hiddenFieldAttraction = document.getElementById("hiddenFieldAttraction").value;
+								if (currentStorage == null) {
+									currentStorage = hiddenFieldAttraction;
+								} else {
+									currentStorage += hiddenFieldAttraction;
+								}
+								localStorage.setItem('Saved Preferences', currentStorage);
+							});
+
 						});
 
 						infowindow.open(map,marker);
