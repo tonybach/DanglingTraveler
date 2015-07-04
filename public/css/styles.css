@@ -267,6 +267,8 @@ div.savedPreferencesWrapper {
 	width: 1000px;
 	display: block;
 	margin: auto;
+	border: 1px solid black;
+	margin-top: 20px;
 }
 
 h1#savedPreferencesTitle {
@@ -275,4 +277,11 @@ h1#savedPreferencesTitle {
 
 #printDataButtons {
 	text-align: center;
+}
+
+.removeSavedPlace {
+	color: rgb(37,4,4);
+	font-size: 20px;
+	float: right;
+	cursor: pointer;
 }

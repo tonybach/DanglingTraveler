@@ -5,6 +5,7 @@ head
 	meta(name='viewport', content='width=device-width, initial-scale=1')
 	script(type='text/javascript', src='https://code.jquery.com/jquery-1.11.0.min.js ')
 	script(type='text/javascript', src='/js/jquery.magnific-popup.min.js')
+	script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
 	script(type='text/javascript', src='/js/FileSaver.min.js')
 	script(type='text/javascript', src='/js/printData.js')
 	script(src='/sweetalert/dist/sweetalert.min.js')
@@ -12,8 +13,6 @@ head
 	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
 	link(rel='stylesheet', type='text/css', href='/css/styles.css')
 	link(rel='stylesheet', href='/sweetalert/dist/sweetalert.css')
-	</head>
-
 	title Saved Preferences
 
 body
@@ -24,7 +23,7 @@ body
 
 	#printDataButtons
 		button.btn.btn-primary.backToUSMapFromPrintData(type='button') Back
-		button.btn.btn-danger.clearAll(type='button') Clear All
+		button.btn.btn-danger.removeAll(type='button') Remove All
 		button.btn.btn-success.printData(type='button') Print
 		button.btn.btn-success.saveAsXHTML(type='button') Save as XHTML
 
