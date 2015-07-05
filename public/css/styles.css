@@ -264,9 +264,10 @@ ul.dropdown-menu li {
 /* Print Data Page */
 
 div.savedPreferencesWrapper {
-	width: 1000px;
+	width: 900px;
 	display: block;
-	margin: auto;
+	/*margin: auto;*/
+	margin-left: 15%;
 	border: 1px solid black;
 	margin-top: 20px;
 }
@@ -277,6 +278,7 @@ h1#savedPreferencesTitle {
 
 #printDataButtons {
 	text-align: center;
+	margin-top: 10px;
 }
 
 .removeSavedPlace {
@@ -289,6 +291,7 @@ h1#savedPreferencesTitle {
 .removeSavedPlaceConfirmation {
 	display: none;
 }
+
 
 /*.restaurantSaved:hover {*/
 	/*width: 400px;/*/

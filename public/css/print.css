@@ -1,0 +1,15 @@
+.no-print, .no-print * {
+	display: none !important;
+},
+
+body {
+	width: 100%;
+}
+
+html {
+	height: auto;
+}
+
+.savedPreferencesWrapper {
+	margin-left: 20px !important;
+}

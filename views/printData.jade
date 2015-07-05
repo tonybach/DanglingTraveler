@@ -12,16 +12,16 @@ head
 
 	link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
 	link(rel='stylesheet', type='text/css', href='/css/styles.css')
+	link(rel='stylesheet', type='text/css', href='/css/print.css' media = 'print')
 	link(rel='stylesheet', href='/sweetalert/dist/sweetalert.css')
+
 	title Saved Preferences
 
 body
 	h1#savedPreferencesTitle Saved Preferences
-	ol
-		ul
-			.listPreference
+	.listPreference
 
-	#printDataButtons
+	#printDataButtons.no-print
 		button.btn.btn-primary.backToUSMapFromPrintData(type='button') Back
 		button.btn.btn-danger.removeAll(type='button') Remove All
 		button.btn.btn-success.printData(type='button') Print

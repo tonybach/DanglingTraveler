@@ -71,19 +71,19 @@ $(document).ready(function () {
 
 		sweetAlert({
 			title: "Are you sure?",  
-			text: "TThe selected restaurant/attraction will be removed.",   
+			text: "The selected restaurant/attraction will be removed.",   
 			type: "warning",   
 			showCancelButton: true,   
 			confirmButtonColor: "#DD6B55",   
-			confirmButtonText: "Yes, remove",   
-			cancelButtonText: "No, keep it",   
+			confirmButtonText: "Yes, remove.",   
+			cancelButtonText: "No, keep it.",   
 			closeOnConfirm: false,   
 			closeOnCancel: false }, 
 			function(isConfirm){   
 				if (isConfirm) {     
-					sweetAlert("Deleted!", "This restaurant/attraction has been removed", "success");
+					sweetAlert("Deleted!", "This restaurant/attraction has been removed.", "success");
 					currentLocalStorage = currentLocalStorage.replace(localStorageLocationString, "");
-					
+
 					// remove the location string from local storage
 					localStorage.setItem('Saved Preferences', currentLocalStorage);
 
