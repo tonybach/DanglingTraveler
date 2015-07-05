@@ -1,23 +1,23 @@
 doctype html(lang='en')
 html
   head
-
-    function preload(arrayOfImages) {
-        $(arrayOfImages).each(function(){
-            $('<img/>')[0].src = this;
-        });
-    }
-    preload([
-        'img/road-trip-ideas.png',
-    ]);
     title Dangling Traveler - Design Your Trip!
-    link(rel='stylesheet', type='text/css', href='css/styles.css')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     script(type='text/javascript', src='https://code.jquery.com/jquery-1.11.0.min.js')
+    script.
+      function preload(arrayOfImages) {
+        $(arrayOfImages).each(function(){
+          $('<img/>')[0].src = this;
+        });
+      }
+      preload([
+          'img/road-trip-ideas.png',
+      ]);
     script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
     script(type='text/javascript', src='js/jquery.geocomplete.js') 
     script(type='text/javascript', src='js/script.js') 
+    link(rel='stylesheet', type='text/css', href='css/styles.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     meta(charset='UTF-8')
     
     #background
