@@ -107,12 +107,18 @@
 
 						google.maps.event.addListener(infowindow, 'domready', function() {
 							var currentStorage = localStorage.getItem('Saved Preferences');
-							var hiddenFieldRestaurant = document.getElementById("hiddenFieldRestaurant").value;
+							var hiddenFieldRestaurant;
+							var hiddenFieldAttraction;
+							if (document.getElementById("hiddenFieldRestaurant")) {
+								hiddenFieldRestaurant = document.getElementById("hiddenFieldRestaurant").value;
+							} 
+							if (document.getElementById("hiddenFieldAttraction")) {
+								hiddenFieldAttraction = document.getElementById("hiddenFieldAttraction").value;
+							}
 							var placeName = baloon_text.substring(4, baloon_text.indexOf('</h4>'));
 
 							$(document.getElementById("restaurantSaved")).on({
 								click: function(){
-									console.log("click");
 									if (currentStorage.indexOf(hiddenFieldRestaurant) > -1) {
 										currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldRestaurant), hiddenFieldRestaurant.length), "")
 									}
@@ -134,35 +140,52 @@
 								// 	infowindow.setContent(baloon_text);
 								// }
 							})
+							
+							if (document.getElementById("restaurantSave")) {
+								document.getElementById("restaurantSave").addEventListener("click", function() {
+									if (currentStorage == null) {
+										currentStorage = hiddenFieldRestaurant;
+									} else {
+										currentStorage += hiddenFieldRestaurant;
+									}
 
-							document.getElementById("restaurantSave").addEventListener("click", function() {
-								if (currentStorage == null) {
-									currentStorage = hiddenFieldRestaurant;
-								} else {
-									currentStorage += hiddenFieldRestaurant;
+									baloon_text = baloon_text.replace("btn-primary", "btn-success");
+									baloon_text = baloon_text.replace("'button'>Save", "'button'>Saved!");
+									baloon_text = baloon_text.replace("restaurantSave", "restaurantSaved");
+
+									infowindow.setContent(baloon_text);
+									localStorage.setItem('Saved Preferences', currentStorage);
+								});		
+							}
+					
+							if (document.getElementById("attractionSave")) {
+								document.getElementById("attractionSave").addEventListener("click", function() {
+									if (currentStorage == null) {
+										currentStorage = hiddenFieldAttraction;
+									} else {
+										currentStorage += hiddenFieldAttraction;
+									}
+
+									baloon_text = baloon_text.replace("btn-primary", "btn-success");
+									baloon_text = baloon_text.replace("'button'>Save", "'button'>Saved!");
+									baloon_text = baloon_text.replace("attractionSave", "attractionSaved");
+
+									infowindow.setContent(baloon_text);
+									localStorage.setItem('Saved Preferences', currentStorage);
+								});
+							}
+
+							document.getElementById("attractionSaved").addEventListener("click", function() {
+								if (currentStorage.indexOf(hiddenFieldAttraction) > -1) {
+									currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldAttraction), hiddenFieldAttraction.length), "")
 								}
-
-								baloon_text = baloon_text.replace("btn-primary", "btn-success");
-								baloon_text = baloon_text.replace("'button'>Save", "'button'>Saved!");
-								baloon_text = baloon_text.replace("restaurantSave", "restaurantSaved");
+								baloon_text = baloon_text.replace("btn-success", "btn-primary");
+								baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Save");
+								baloon_text = baloon_text.replace("attractionSaved", "attractionSave");
 
 								infowindow.setContent(baloon_text);
 								localStorage.setItem('Saved Preferences', currentStorage);
 							});
-							
-
-							// document.getElementById("attractionSave").addEventListener("click", function() {
-							// 	console.log('yay!');
-
-							// 	currentStorage = localStorage.getItem('Saved Preferences');
-							// 	var hiddenFieldAttraction = document.getElementById("hiddenFieldAttraction").value;
-							// 	if (currentStorage == null) {
-							// 		currentStorage = hiddenFieldAttraction;
-							// 	} else {
-							// 		currentStorage += hiddenFieldAttraction;
-							// 	}
-							// 	localStorage.setItem('Saved Preferences', currentStorage);
-							// });
 
 						});
 

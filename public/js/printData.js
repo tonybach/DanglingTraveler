@@ -43,6 +43,7 @@ $(document).ready(function () {
        		 , {type: "application/xhtml+xml;charset=" + document.characterSet}
     	)
     	saveAs(blob, "savedData.xhtml");
+
 	})
 
 	// $('.removeSavedPlace').on('mouseover', function() {
