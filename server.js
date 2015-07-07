@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var dialog = require('dialog');
 // var swal = require('sweetalert');
 //Using native mongodb client
 //var MongoClient = require('mongodb').MongoClient, assert = require('assert');
