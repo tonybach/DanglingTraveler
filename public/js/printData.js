@@ -46,14 +46,6 @@ $(document).ready(function () {
 
 	})
 
-	// $('.removeSavedPlace').on('mouseover', function() {
-	// 	$('.removeSavedPlaceConfirmation').css('display', 'block');
-	// })
-
-	// $('.removeSavedPlace').on('mouseout', function() {
-	// 	$('.removeSavedPlaceConfirmation').css('display', 'none');
-	// })
-
 	$('.removeSavedPlace').on('click', function() {
 		var currentLocalStorage = localStorage.getItem('Saved Preferences');
 		var thisWrapper = $(this).closest(".savedPreferencesWrapper");

@@ -4,16 +4,7 @@ $(document).ready(function () {
 // BACK TO US MAP BUTTON
 // -------------------------------------
 	$(".backToUSMapFromCityMap").click(function() {
-		// console.log(parent.history);
 		window.history.go(-parseInt(visitsToCityMap));
-		// return false;
-	// 	// $('.cityMap').css('visibility','hidden');
-	// 	// $('.cityMapOptions').css('visibility','hidden');
-	// 	// $('.USmap').css('opacity', '1');
-	// 	// $('#buttons').css('visibility', 'visible');
-	// 	// $('.USMapPageButtons').css('opacity', '1');
-	// 	// $('#popup').css('visibility','visible');
-		// window.location.href = "/USMap/"
 	});
 
 // -------------------------------------
@@ -30,20 +21,12 @@ $(document).ready(function () {
 		modal: false
 	});
 
-	// $('#hideChangeSearch').on('click', function(e) {
- //    	e.preventDefault();
- //    	$.magnificPopup.close();
-	// });
-
 	$('#closePopup').on('click', function(e) {
     	e.preventDefault();
     	$.magnificPopup.close();
 	});
 
 	console.log(destination);
-	// console.log(visits);
-
-	// console.log(restaurant_list);
 
 	$('.USMapPageButtons').on('click', function() {
 		window.location.href = "/USMap/print";
@@ -68,6 +51,12 @@ $(document).ready(function () {
 
 	if (typeof(restaurant_list) !== 'undefined' && typeof(attraction_list) !== 'undefined') {
 		var cityMarkers = {"markers": []};
+		if (restaurant_list.length == 0) {
+			sweetAlert("Oops...", "There is no " + restaurantCategory + " restaurant in this area!", "error");
+		}
+		if (attraction_list.length == 0) {
+			sweetAlert("Oops...", "There is no " + attractionCategory + " in this area!", "error");
+		}
 		for (var i = 0; i < restaurant_list.length; i++) {
 			var restaurant = restaurant_list[i];
 
@@ -130,26 +119,4 @@ $(document).ready(function () {
 	//]]
 
 });
-
-//-----------------------------------------------------------------------
-//Local Storage
-//-----------------------------------------------------------------------
-
-// $('#LocalStorage').on('click', function() {
-// 	// var restaurant=req.body.id;
-// 	// console.log(restaurant);
-// 	// console.log("success");
-// 	var Storage = require('dom-storage');
-// 	var localStorage = new Storage('./db.json', { strict: false, ws: '  ' });
-
-//   	// , myValue = { restaurant: restaurant };
-
-// 	// localStorage.setItem('Saved Preferences', myValue);
-// 	localStorage.setItem('Saved Preferences', restaurant);
-// 	myValue = localStorage.getItem('Saved Preferences');
-// 	myValue = myValue.split("*");
-// 	savedPreferences.push(myValue)
-// 	console.log(myValue);
-// 	console.log(savedPreferences);			
-// });
 

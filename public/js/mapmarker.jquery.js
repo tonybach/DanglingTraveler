@@ -19,22 +19,6 @@
 		center	: 'United States',
 		markers	: defaultMarkers
 	}
-
-	function testFunc() {
-		console.log("hello world");
-	}
-
-	// function saveToLocalStorage(htmlText) {
-	//   	// , myValue = { restaurant: restaurant };
-
-	// 	// localStorage.setItem('Saved Preferences', myValue);
-	// 	localStorage.setItem('Saved Preferences', htmlText);
-	// 	myValue = localStorage.getItem('Saved Preferences');
-	// 	// myValue = myValue.split("*");
-	// 	savedPreferences.push(myValue)
-	// 	console.log(myValue);
-	// 	console.log(savedPreferences);			
-	// }
 	
 	// Main function code here (ref:google map api v3)
 	function addMapMarker(map_element, zoom, center, markers){
@@ -75,10 +59,7 @@
 				if (name == destination) {
 					myURL="/USMap/"+encodeURI(destination)+"/restaurants/arts";
 				}
-			}
-
-			// var infowindow = new google.maps.InfoWindow({});
-			
+			}			
 
 			geocoder.geocode({'address': name}, function(results, status) {
 
@@ -117,30 +98,6 @@
 							}
 							var placeName = baloon_text.substring(4, baloon_text.indexOf('</h4>'));
 
-							$(document.getElementById("restaurantSaved")).on({
-								click: function(){
-									if (currentStorage.indexOf(hiddenFieldRestaurant) > -1) {
-										currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldRestaurant), hiddenFieldRestaurant.length), "")
-									}
-									baloon_text = baloon_text.replace("btn-success", "btn-primary");
-									baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Save");
-									baloon_text = baloon_text.replace("restaurantSaved", "restaurantSave");
-
-									infowindow.setContent(baloon_text);
-									localStorage.setItem('Saved Preferences', currentStorage);
-								},
-								// mouseover: function() {
-								// 	console.log("over");
-								// 	baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Deselect?");
-								// 	infowindow.setContent(baloon_text);
-								// },
-								// mouseout: function() {
-								// 	console.log("out");
-								// 	baloon_text = baloon_text.replace("'button'>Deselect?", "'button'>Saved!");
-								// 	infowindow.setContent(baloon_text);
-								// }
-							})
-							
 							if (document.getElementById("restaurantSave")) {
 								document.getElementById("restaurantSave").addEventListener("click", function() {
 									if (currentStorage == null) {
@@ -157,7 +114,33 @@
 									localStorage.setItem('Saved Preferences', currentStorage);
 								});		
 							}
-					
+
+							if (document.getElementById("restaurantSaved")) {
+								$(document.getElementById("restaurantSaved")).on({
+									click: function(){
+										if (currentStorage.indexOf(hiddenFieldRestaurant) > -1) {
+											currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldRestaurant), hiddenFieldRestaurant.length), "")
+										}
+										baloon_text = baloon_text.replace("btn-success", "btn-primary");
+										baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Save");
+										baloon_text = baloon_text.replace("restaurantSaved", "restaurantSave");
+
+										infowindow.setContent(baloon_text);
+										localStorage.setItem('Saved Preferences', currentStorage);
+									},
+									// mouseover: function() {
+									// 	console.log("over");
+									// 	baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Deselect?");
+									// 	infowindow.setContent(baloon_text);
+									// },
+									// mouseout: function() {
+									// 	console.log("out");
+									// 	baloon_text = baloon_text.replace("'button'>Deselect?", "'button'>Saved!");
+									// 	infowindow.setContent(baloon_text);
+									// }
+								})
+							}
+												
 							if (document.getElementById("attractionSave")) {
 								document.getElementById("attractionSave").addEventListener("click", function() {
 									if (currentStorage == null) {
@@ -175,17 +158,19 @@
 								});
 							}
 
-							document.getElementById("attractionSaved").addEventListener("click", function() {
-								if (currentStorage.indexOf(hiddenFieldAttraction) > -1) {
-									currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldAttraction), hiddenFieldAttraction.length), "")
-								}
-								baloon_text = baloon_text.replace("btn-success", "btn-primary");
-								baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Save");
-								baloon_text = baloon_text.replace("attractionSaved", "attractionSave");
+							if (document.getElementById("attractionSaved")) {
+								document.getElementById("attractionSaved").addEventListener("click", function() {
+									if (currentStorage.indexOf(hiddenFieldAttraction) > -1) {
+										currentStorage = currentStorage.replace(currentStorage.substr(currentStorage.indexOf(hiddenFieldAttraction), hiddenFieldAttraction.length), "")
+									}
+									baloon_text = baloon_text.replace("btn-success", "btn-primary");
+									baloon_text = baloon_text.replace("'button'>Saved!", "'button'>Save");
+									baloon_text = baloon_text.replace("attractionSaved", "attractionSave");
 
-								infowindow.setContent(baloon_text);
-								localStorage.setItem('Saved Preferences', currentStorage);
-							});
+									infowindow.setContent(baloon_text);
+									localStorage.setItem('Saved Preferences', currentStorage);
+								});
+							}
 
 						});
 
@@ -214,8 +199,6 @@
 				}
 
 			});	
-				//console.log(marker);
-				// Set up markers with info windows 
 		});
 	}
 })(jQuery);
