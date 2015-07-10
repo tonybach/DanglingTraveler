@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
-var dialog = require('dialog');
 
 var yelp = require("yelp").createClient({
   consumer_key: "ZpQmVj8ugw-jJzqUd_VBhw", 
