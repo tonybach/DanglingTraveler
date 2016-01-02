@@ -17,7 +17,7 @@
 	$.fn.mapmarker.defaults = {
 		zoom	: 8,
 		center	: 'United States',
-		markers	: defaultMarkers
+		markers	: defaultMarkers,
 	}
 	
 	// Main function code here (ref:google map api v3)
@@ -27,7 +27,10 @@
 		//Set center of the Map
 		var myOptions = {
 		  zoom: zoom,
-		  mapTypeId: google.maps.MapTypeId.ROADMAP
+		  mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  streetViewControl: false,
+		  mapTypeControl: false,
+		  rotateControl: false
 		}
 		var map = new google.maps.Map(map_element, myOptions);
 		var geocoder = new google.maps.Geocoder();

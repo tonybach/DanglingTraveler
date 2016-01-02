@@ -5,26 +5,25 @@ html
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     #background
-      img.stretch(src='img/road-trip-ideas-min.png', alt='' width = '2134' height = '1405')
+      img.stretch(src='img/roadTrip.png', alt="Your browser can't show this background image!" width = '2134' height = '1405')
     title Dangling Traveler - Design Your Trip!
     script(type='text/javascript', src='https://code.jquery.com/jquery-1.11.0.min.js')
     script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false')
     script(type='text/javascript', src='js/jquery.geocomplete.js') 
     script(type='text/javascript', src='js/script.js') 
-    link(rel='stylesheet', type='text/css', href='css/styles.css')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
-
-    
+    link(rel='stylesheet', type='text/css', href='css/styles.css')
 
     body
       .container
         form#travelform(action='USMap', method='POST')
-          .row
-            input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Enter your destination here!', style='width:450px', value='')
-            input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
-            input#goButton.btn-circle(type='submit', value="GO!")
-          #wrapper 
+          .cityInputForm
+            .row.firstCityInput.col-md4
+              input.input.input-sm.inputCity(type='text', name = 'destination' placeholder='Enter your destination here!', value='')
+              input.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
+              input.goButton.btn-circle(type='submit', value="GO!")
+            #wrapper
             
       script.
         var maxCities = 3;
@@ -32,7 +31,7 @@ html
 
         function add_cities() {
           if (currentCities < maxCities) {
-            $("#wrapper").append('<div class="extraCities"><input type="text" name="destination" placeholder="Next destination" class="input input-sm" style="width:450px"></input><button class="btn btn-default delete">-</button></div>');
+            $("#wrapper").append('<div class="extraCities row col-md4"><input type="text" name="destination" placeholder="Next destination" class="input input-sm inputCity"></input><button class="btn btn-default delete">-</button></div>');
             $("input").geocomplete({
               componentRestrictions: {country: 'us'}
             })

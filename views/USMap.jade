@@ -25,14 +25,14 @@ head
       .USmap
       #popup
         #popup_background
-          img(src='/img/road-trip-ideas.png', alt='')
+          img(src='/img/roadTrip.png', alt="Your browser can't show this background image!")
         span.glyphicon.glyphicon-remove-sign#closePopup
         form#popup_travelform(action='/USMap', method='POST' autocomplete = 'false')
           .row
             .row
-              input#DestinationCity.input.input-sm(type='text', name = 'destination' placeholder='Enter your destination here!', style='width:450px', value='' autocomplete = 'false')
-              input#DestinationCity.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
-              input#goButton.btn-circle(type='submit', value="GO!")
+              input.input.input-sm(type='text', name = 'destination' placeholder='Enter your destination here!', style='width:450px', value='' autocomplete = 'false')
+              input.btn.btn-default.addButton(type='button', onclick='add_cities();', value='+')
+              input.goButton.btn-circle(type='submit', value="GO!")
             #wrapper 
         button#hideChangeSearch.btn.btn-primary Back
     script.
