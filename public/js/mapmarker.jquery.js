@@ -56,11 +56,11 @@
 
 			if (typeof destination!="string") {
 				if (name == destination[i]) {
-					myURL="/USMap/"+encodeURI(destination[i])+"/restaurants/arts";
+					myURL="/USMap/"+encodeURI(destination[i])+"/restaurants/landmarks";
 				}
 			} else {
 				if (name == destination) {
-					myURL="/USMap/"+encodeURI(destination)+"/restaurants/arts";
+					myURL="/USMap/"+encodeURI(destination)+"/restaurants/landmarks";
 				}
 			}			
 

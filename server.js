@@ -109,7 +109,7 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 
 				// render city map using data
 				// console.log(visits);
-				if (restaurantCategory == "restaurants" && attractionCategory == "arts") {
+				if (restaurantCategory == "restaurants" && attractionCategory == "landmarks") {
 					visitsToCityMap = 1;
 				} else {
 					visitsToCityMap = visitsToCityMap + 1;
@@ -117,9 +117,7 @@ app.get('/USMap/:city?/:restaurantCategory?/:attractionCategory?', function(req,
 				res.render('cityMap', {visitsToCityMap: visitsToCityMap, destination: destination, restaurants: JSON.stringify(restaurants), attractions: JSON.stringify(attractions), restaurantCategory: restaurantCategory, attractionCategory: attractionCategory});
 			})
 		});				
-			// }	
 	}	
-	// })
 	else {
 		res.render('USMap', {destination: JSON.stringify(destination)});
 	}

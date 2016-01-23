@@ -1,30 +1,37 @@
 $(function() {
-  $.getJSON("https://jsonp.afeld.me/?url=https://www.yelp.com/developers/documentation/v2/all_category_list/categories.json", function (data) {
-    // var restaurantTags = [];
-    // // food + restaurants
-    // var restaurantCategories = [data[7].category, data[20].category];
-    // for (var i = 0; i < restaurantCategories.length; i++) {
-    //   for (var j = 0; j < restaurantCategories[i].length; j++) {
-    //     restaurantTags.push(restaurantCategories[i][j].alias)
-    //   }
-    // }
-    // $('#restaurantCategory').autocomplete({
-    //   source: restaurantTags
-    // });
-    console.log(data[0])
+  $.getJSON("/js/categories.json", function (data) {
+    var restaurantTags = [];
+    var attractionTags = [];
+    var restaurantCategories = ['restaurants', 'food'];
+    var attractionCategories = ['active', 'arts', 'eventservices', 'nightlife', 'religiousorgs', 'shopping']
+
+    for (var i = 0; i < data.length; i++) {
+      if (restaurantCategories.some(category => data[i]['parents'].indexOf(category) != -1)) {
+        restaurantTags.push(data[i]['alias']);
+      } else if (attractionCategories.some(category => data[i]['parents'].indexOf(category) != -1) || data[i]['alias'] == 'landmarks' || data[i]['alias'] == 'localflavor') {
+        attractionTags.push(data[i]['alias']);
+      }
+    }
+    $('#restaurantCategory').autocomplete({
+      source: function(request, response) {
+        var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response($.grep(restaurantTags, function(item) {
+          return matcher.test(item);
+        }));
+      }
+    });
+    $('#attractionCategory').autocomplete({
+      source: function(request, response) {
+        var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex(request.term), "i" );
+        response($.grep(attractionTags, function(item) {
+          return matcher.test(item);
+        }));
+      }
+    });
   })
-  // $.getJSON("https://jsonp.nodejitsu.com/?callback=?&url=https://raw.githubusercontent.com/Yelp/yelp-api/master/category_lists/en/category.json", function (data) {
-  //   var attractionTags = [];
-  //   var attractionCategories = [data[0].category, data[1].category, data[5].category, data[10].category, data[14].category, data[19].category];
-  //   for (var i = 0; i < attractionCategories.length; i++) {
-  //     for (var j = 0; j < attractionCategories[i].length; j++) {
-  //       attractionTags.push(attractionCategories[i][j].alias)
-  //     }
-  //   }
-  //   $('#attractionCategory').autocomplete({
-  //     source: attractionTags
-  //   });
-  // })
+  .fail(function(d, textStatus, error) {
+    console.error("getJSON failed, status: " + textStatus + ", error: "+error)
+  });
 })
 
 function restaurantSubmitForm() {
