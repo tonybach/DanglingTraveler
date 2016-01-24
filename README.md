@@ -19,7 +19,7 @@ This app could not have been possible without the use of:
 
 ### Sounds good! How do I start?
 
-_Try it out directly here [**here**](http://thedanglingtraveler.herokuapp.com)_.
+_Try it out directly here [**here**](http://danglingtraveler.herokuapp.com)_.
 
 or
 
@@ -34,7 +34,7 @@ _Download the code and try the app locally_: To do this, just follow these steps
 
 [Shivangi Pattnaik]: https://www.linkedin.com/profile/view?id=149276731&authType=NAME_SEARCH&authToken=2hJ_&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2Cidx%3A1-1-1%2CtarId%3A1436193522085%2Ctas%3Ashiva
 [Long Tran]: https://www.linkedin.com/profile/view?id=233380419&authType=NAME_SEARCH&authToken=oLqA&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2Cidx%3A1-1-1%2CtarId%3A1436193398720%2Ctas%3ALong
-[Tony Bach]: https://www.linkedin.com/in/phucbach
+[Tony Bach]: http://tonybach.net
 [jQuery Map Marker Plugin]: https://github.com/aslamdoctor/jQuery.mapmarker
 [Yelp]: http://www.yelp.com
 [SweetAlert]: http://t4t5.github.io/sweetalert/
