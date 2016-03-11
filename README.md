@@ -1,4 +1,4 @@
-# The Dangling Traveler
+# Dangling Traveler
 
 ### What is this?
 
@@ -19,18 +19,7 @@ This app could not have been possible without the use of:
 
 ### Sounds good! How do I start?
 
-_Try it out directly here [**here**](http://danglingtraveler.herokuapp.com)_.
-
-or
-
-_Download the code and try the app locally_: To do this, just follow these steps:
-
-1. Clone this repository.
-2. Open a command prompt and navigate to the directory to where you cloned the repository to.
-3. In the command prompt, type 'npm install'.
-4. After that is done, type 'node server.js'.
-5. Open a web browser and go to 'localhost:8080'.
-6. That's it!
+You can try it out [**here**](http://danglingtraveler.herokuapp.com). Let us know what you think!
 
 [Shivangi Pattnaik]: https://www.linkedin.com/profile/view?id=149276731&authType=NAME_SEARCH&authToken=2hJ_&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2Cidx%3A1-1-1%2CtarId%3A1436193522085%2Ctas%3Ashiva
 [Long Tran]: https://www.linkedin.com/profile/view?id=233380419&authType=NAME_SEARCH&authToken=oLqA&locale=en_US&trk=tyah&trkInfo=clickedVertical%3Amynetwork%2Cidx%3A1-1-1%2CtarId%3A1436193398720%2Ctas%3ALong
